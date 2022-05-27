@@ -8,6 +8,9 @@ public class EComerceCamisaTimeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(EComerceCamisaTimeApplication.class, args);
+
+        System.out.println("BOM DIA");
+
     }
 
 }
