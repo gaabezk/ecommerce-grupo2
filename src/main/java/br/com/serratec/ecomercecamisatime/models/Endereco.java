@@ -2,6 +2,7 @@ package br.com.serratec.ecomercecamisatime.models;
 
 import javax.persistence.*;
 
+
 @Entity
 public class Endereco {
 

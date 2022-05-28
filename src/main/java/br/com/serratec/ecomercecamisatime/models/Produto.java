@@ -7,11 +7,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Produto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String nome,descricao,tamanho,time,genero;
     private Integer quantidade;
     private Double valor;

@@ -11,11 +11,8 @@ public class Usuario {
     @CPF
     private String cpf;
     private String telefone;
-
     private String username;
-
     private String password;
-
     public Usuario() {
     }
 
