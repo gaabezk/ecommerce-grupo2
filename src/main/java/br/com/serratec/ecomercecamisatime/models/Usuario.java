@@ -1,4 +1,4 @@
-package br.com.serratec.ecomercecamisatime.model;
+package br.com.serratec.ecomercecamisatime.models;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -12,13 +12,19 @@ public class Usuario {
     private String cpf;
     private String telefone;
 
+    private String username;
+
+    private String password;
+
     public Usuario() {
     }
 
-    public Usuario(String nome, String cpf, String telefone) {
+    public Usuario(String nome, String cpf, String telefone,String username, String password) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.username = username;
+        this.password = password;
     }
 
     public String getNome() {
@@ -43,5 +49,17 @@ public class Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

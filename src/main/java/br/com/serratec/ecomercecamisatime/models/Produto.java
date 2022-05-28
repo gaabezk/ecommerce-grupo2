@@ -1,4 +1,4 @@
-package br.com.serratec.ecomercecamisatime.model;
+package br.com.serratec.ecomercecamisatime.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
