@@ -1,5 +1,16 @@
 package br.com.serratec.ecomercecamisatime.model;
 
-public class Funcionario extends Usuario {
+import javax.persistence.*;
+
+@Entity
+public class Funcionario{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private Endereco endereco;
+    @Embedded
+    private Usuario usuario;
 
 }
