@@ -1,5 +1,6 @@
 package br.com.serratec.ecomercecamisatime.models;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ public class Usuario {
 
     private String nome;
     @CPF
+    @UniqueElements
     private String cpf;
     private LocalDate dataNascimento;
     private String telefone;
