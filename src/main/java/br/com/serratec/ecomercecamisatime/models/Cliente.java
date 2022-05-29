@@ -10,7 +10,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer clientId;
 
-    @ManyToMany //TODO TROCAR TMB
+    @OneToMany//TODO TROCAR TMB
     private List<Endereco> endereco;
     @Embedded
     private Usuario usuario;

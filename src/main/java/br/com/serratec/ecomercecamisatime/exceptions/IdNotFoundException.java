@@ -6,7 +6,7 @@ public class IdNotFoundException extends Exception {
         return "ERROR";
     }
     public String m2() {
-        return "Id do produto nao encontrada";
+        return "Id nao encontrado";
     }
 
 }
