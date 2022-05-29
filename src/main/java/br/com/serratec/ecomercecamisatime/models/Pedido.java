@@ -1,5 +1,7 @@
 package br.com.serratec.ecomercecamisatime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,18 +12,19 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private LocalDateTime dataHora;
 
-    @OneToMany
-    private List<Produto> produtos;
+
+    @ManyToMany(mappedBy = "pedidosProduto")
+    private List<Produto> produtosPedido;
 
     public Pedido() {
     }
     public Pedido(Integer id, LocalDateTime dataHora, List<Produto> produtos) {
         this.id = id;
         this.dataHora = dataHora;
-        this.produtos = produtos;
+        this.produtosPedido = produtos;
     }
 
     public Integer getId() {
@@ -41,10 +44,10 @@ public class Pedido {
     }
 
     public List<Produto> getProdutos() {
-        return produtos;
+        return produtosPedido;
     }
 
     public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+        this.produtosPedido = produtos;
     }
 }

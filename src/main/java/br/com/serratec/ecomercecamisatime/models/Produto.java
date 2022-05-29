@@ -1,22 +1,31 @@
 package br.com.serratec.ecomercecamisatime.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
+@Table(name = "produto")
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
+    @Size(max = 80)
     private String nome,descricao,tamanho,time,genero;
+    @NotNull
     private Integer quantidade;
+    @NotNull
     private Double valor;
-
+    @JsonIgnore
+    @ManyToMany
+    private List<Pedido> pedidosProduto;
     public Produto() {
     }
-    public Produto(Integer id, String nome, String descricao, String tamanho, String time, String genero, Integer quantidade, Double valor) {
+    public Produto(Integer id, String nome, String descricao, String tamanho, String time, String genero, Integer quantidade, Double valor, List<Pedido> pedidosProduto) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -25,6 +34,7 @@ public class Produto {
         this.genero = genero;
         this.quantidade = quantidade;
         this.valor = valor;
+        this.pedidosProduto = pedidosProduto;
     }
 
     public Integer getId() {
@@ -89,5 +99,12 @@ public class Produto {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public List<Pedido> getPedidosProduto() {
+        return pedidosProduto;
+    }
+    public void setPedidosProduto(List<Pedido> pedidosProduto) {
+        this.pedidosProduto = pedidosProduto;
     }
 }
