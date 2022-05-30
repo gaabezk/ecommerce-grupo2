@@ -16,8 +16,8 @@ public class Pedido {
     @ManyToMany(mappedBy = "pedidosProduto")
     private List<Produto> produtosPedido;
 
-    @ManyToOne
-    private Cliente cliente;
+   /* @ManyToOne
+    private Cliente cliente;*/
 
     public Pedido() {
     }

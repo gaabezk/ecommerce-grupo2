@@ -1,6 +1,7 @@
 package br.com.serratec.ecommercecamisatime.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -12,12 +13,14 @@ public class Endereco {
     private Integer idEndereco;
 
     @Column(name = "cep")
+    @NotNull
     private String cep;
 
     @Column(name = "rua")
     private String rua;
 
     @Column(name = "numero")
+    @NotNull
     private String numero;
 
     @Column(name = "complemento")
@@ -29,8 +32,8 @@ public class Endereco {
     @Column(name = "cidade")
     private String cidade;
 
-    @ManyToMany(mappedBy = "enderecoList")
-    private List<Cliente> clienteList;
+   /* @ManyToMany(mappedBy = "enderecoList")
+    private List<Cliente> clienteList;*/
 
     public Endereco() {
     }

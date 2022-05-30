@@ -11,7 +11,6 @@ public class Funcionario{
 
     @ManyToOne //TODO TROCAR DPS
     private Endereco endereco;
-    @Embedded
-    private Usuario usuario;
+
 
 }
