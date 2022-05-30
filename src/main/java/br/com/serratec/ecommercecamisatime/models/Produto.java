@@ -15,10 +15,29 @@ public class Produto {
     private Integer id;
     @NotNull
     @Size(max = 80)
-    private String nome,descricao,tamanho,time,genero;
+    @Column(name = "nome")
+    private String nome;
     @NotNull
+    @Size(max = 80)
+    @Column(name = "descricao")
+    private String descricao;
+    @NotNull
+    @Size(max = 80)
+    @Column(name = "tamanho")
+    private String tamanho;
+    @NotNull
+    @Size(max = 80)
+    @Column(name = "time")
+    private String time;
+    @NotNull
+    @Size(max = 80)
+    @Column(name = "genero")
+    private String genero;
+    @NotNull
+    @Column(name = "quantidade")
     private Integer quantidade;
     @NotNull
+    @Column(name = "valor")
     private Double valor;
     @JsonIgnore
     @ManyToMany

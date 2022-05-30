@@ -13,9 +13,11 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private LocalDateTime dataHora;
 
-
     @ManyToMany(mappedBy = "pedidosProduto")
     private List<Produto> produtosPedido;
+
+    @ManyToOne
+    private Cliente cliente;
 
     public Pedido() {
     }

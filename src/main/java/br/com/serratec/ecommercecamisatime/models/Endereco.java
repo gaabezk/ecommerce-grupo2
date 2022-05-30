@@ -1,26 +1,41 @@
 package br.com.serratec.ecommercecamisatime.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_endereco")
+    private Integer idEndereco;
 
-    private String cep,rua,numero,complemento,bairro;
+    @Column(name = "cep")
+    private String cep;
 
-    @Size(min= 3, max = 40)
+    @Column(name = "rua")
+    private String rua;
+
+    @Column(name = "numero")
+    private String numero;
+
+    @Column(name = "complemento")
+    private String complemento;
+
+    @Column(name = "bairro")
+    private String bairro;
+
+    @Column(name = "cidade")
     private String cidade;
+
+    @ManyToMany(mappedBy = "enderecoList")
+    private List<Cliente> clienteList;
 
     public Endereco() {
     }
-    public Endereco(Integer id, String cep, String rua, String numero, String complemento, String bairro, String cidade) {
-        this.id = id;
+    public Endereco(Integer idEndereco, String cep, String rua, String numero, String complemento, String bairro, String cidade) {
+        this.idEndereco = idEndereco;
         this.cep = cep;
         this.rua = rua;
         this.numero = numero;
@@ -30,11 +45,11 @@ public class Endereco {
     }
 
     public Integer getId() {
-        return id;
+        return idEndereco;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idEndereco = idEndereco;
     }
 
     public String getCep() {

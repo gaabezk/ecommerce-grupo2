@@ -12,9 +12,8 @@ public class Cliente{
 
     @Embedded
     private Usuario usuario;
-
-    @OneToMany//TODO TROCAR TMB
-    private List<Endereco> endereco;
+    @ManyToMany(mappedBy = "clienteList")
+    private List<Endereco> enderecoList;
 
     @OneToMany
     private List<Pedido> pedido;
