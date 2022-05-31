@@ -13,18 +13,19 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private LocalDateTime dataHora;
 
-    @ManyToMany(mappedBy = "pedidosProduto")
-    private List<Produto> produtosPedido;
+    @OneToMany(mappedBy = "pedido")
+    private List<Produto> produtos;
 
-   /* @ManyToOne
-    private Cliente cliente;*/
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     public Pedido() {
     }
     public Pedido(Integer id, LocalDateTime dataHora, List<Produto> produtos) {
         this.id = id;
         this.dataHora = dataHora;
-        this.produtosPedido = produtos;
+        this.produtos = produtos;
     }
 
     public Integer getId() {
@@ -44,10 +45,10 @@ public class Pedido {
     }
 
     public List<Produto> getProdutos() {
-        return produtosPedido;
+        return produtos;
     }
 
     public void setProdutos(List<Produto> produtos) {
-        this.produtosPedido = produtos;
+        this.produtos = produtos;
     }
 }
