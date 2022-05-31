@@ -31,9 +31,9 @@ public class Endereco {
 
     @Column(name = "cidade")
     private String cidade;
-
-   /* @ManyToMany(mappedBy = "enderecoList")
-    private List<Cliente> clienteList;*/
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     public Endereco() {
     }
