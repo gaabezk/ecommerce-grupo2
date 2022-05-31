@@ -9,8 +9,7 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private LocalDateTime dataHora;
 
     @OneToMany(mappedBy = "pedido")

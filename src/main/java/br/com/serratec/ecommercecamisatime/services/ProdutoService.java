@@ -9,24 +9,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class ProdutoService {
 
-    @Autowired
-    ProdutoRepositorio produtoRepositorio;
+	@Autowired
+	ProdutoRepositorio produtoRepositorio;
 
-    public List<Produto> listarProdutos(){
-        return produtoRepositorio.findAll();
-    }
-    public Produto listarPorId(Integer id) throws IdNotFoundException {
-        Optional<Produto> optional = produtoRepositorio.findById(id);
-        if (optional.isEmpty()){
-            throw new IdNotFoundException();
-        }
-        return optional.get();
-    }
-    public void insert(Produto produto) {
-        produtoRepositorio.save(produto);
-    }
+	public List<Produto> listarProdutos() {
+		return produtoRepositorio.findAll();
+	}
+
+	public Produto listarPorId(Integer id) throws IdNotFoundException {
+		Optional<Produto> optional = produtoRepositorio.findById(id);
+		if (optional.isEmpty()) {
+			throw new IdNotFoundException();
+		}
+		return optional.get();
+	}
+
+	public void insert(Produto produto) {
+		produtoRepositorio.save(produto);
+	}
 }

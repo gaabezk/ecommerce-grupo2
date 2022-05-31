@@ -1,11 +1,8 @@
 package br.com.serratec.ecommercecamisatime.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "produto")
@@ -13,30 +10,30 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull
+//    @NotNull
     @Size(max = 80)
     @Column(name = "nome")
     private String nome;
-    @NotNull
+//    @NotNull
     @Size(max = 80)
     @Column(name = "descricao")
     private String descricao;
-    @NotNull
+//    @NotNull
     @Size(max = 80)
     @Column(name = "tamanho")
     private String tamanho;
-    @NotNull
+//    @NotNull
     @Size(max = 80)
     @Column(name = "time")
     private String time;
-    @NotNull
+//    @NotNull
     @Size(max = 80)
     @Column(name = "genero")
     private String genero;
-    @NotNull
+//    @NotNull
     @Column(name = "quantidade")
     private Integer quantidade;
-    @NotNull
+//    @NotNull
     @Column(name = "valor")
     private Double valor;
     @ManyToOne
