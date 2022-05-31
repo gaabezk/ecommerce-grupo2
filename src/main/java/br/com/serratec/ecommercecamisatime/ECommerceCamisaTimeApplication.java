@@ -16,6 +16,7 @@ public class ECommerceCamisaTimeApplication {
         LocalDateTime myObj = LocalDateTime.now();
         System.out.println(myObj);
     }
+    @Deprecated
     public static void saudacao(){
         Integer h = new Date().getHours();
 

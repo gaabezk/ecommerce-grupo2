@@ -39,12 +39,12 @@ public class Produto {
     @NotNull
     @Column(name = "valor")
     private Double valor;
-    @JsonIgnore
-    @ManyToMany
-    private List<Pedido> pedidosProduto;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
     public Produto() {
     }
-    public Produto(Integer id, String nome, String descricao, String tamanho, String time, String genero, Integer quantidade, Double valor, List<Pedido> pedidosProduto) {
+    public Produto(Integer id, String nome, String descricao, String tamanho, String time, String genero, Integer quantidade, Double valor, Pedido pedido) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -53,7 +53,7 @@ public class Produto {
         this.genero = genero;
         this.quantidade = quantidade;
         this.valor = valor;
-        this.pedidosProduto = pedidosProduto;
+        this.pedido = pedido;
     }
 
     public Integer getId() {
@@ -120,10 +120,10 @@ public class Produto {
         this.valor = valor;
     }
 
-    public List<Pedido> getPedidosProduto() {
-        return pedidosProduto;
+    public Pedido getPedido() {
+        return pedido;
     }
-    public void setPedidosProduto(List<Pedido> pedidosProduto) {
-        this.pedidosProduto = pedidosProduto;
+    public void setPedido(Pedido pedido){
+        this.pedido = pedido;
     }
 }

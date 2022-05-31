@@ -7,14 +7,17 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-@Embeddable
+@Entity
 public class Cliente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(name = "nome")
     private String nome;
     @CPF
     @NotNull
-    @Column(name = "email", unique = true)
+    @Column(name = "cpf", unique = true)
     private String cpf;
     @NotNull
     @Column(name = "data_nascimento")
@@ -28,9 +31,12 @@ public class Cliente {
     @NotNull
     @Column(name = "password")
     private String password;
-    @ManyToMany
-    @Column(name = "pedido_cliente")
-    private List<Pedido> pedido;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Endereco> enderecos;
 
     public Cliente() {
     }
@@ -86,9 +92,9 @@ public class Cliente {
         this.password = password;
     }
     public List<Pedido> getPedido() {
-        return pedido;
+        return pedidos;
     }
     public void setPedido(List<Pedido> pedido) {
-        this.pedido = pedido;
+        this.pedidos = pedido;
     }
 }
