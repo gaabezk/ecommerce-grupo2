@@ -11,7 +11,7 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 //    @NotNull
-    @Size(max = 80)
+    @Size(max = 60)
     @Column(name = "nome")
     private String nome;
 //    @NotNull
