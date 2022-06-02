@@ -1,5 +1,6 @@
 package br.com.serratec.ecommercecamisatime.models;
 
+
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -16,44 +17,38 @@ public class Cliente {
 	@NotNull
 	@Column(name = "nome")
 	private String nome;
+	@CPF
 	@NotNull
 	@Column(name = "cpf", unique = true)
 	private String cpf;
 	@NotNull
-	@Column(name = "data_nascimento")
-	private LocalDate dataNascimento;
-	@NotNull
 	@Column(name = "telefone")
 	private String telefone;
 	@NotNull
-	@Column(name = "email", unique = true)
-	private String email;
-	@NotNull
-	@Column(name = "password")
-	private String password;
-
-//	@OneToMany(mappedBy = "cliente")
-//	private List<Pedido> pedidos;
-//
-//	@OneToMany(mappedBy = "cliente")
-//	private List<Endereco> enderecos;
+	@Column(name = "data_nascimento")
+	private LocalDate dataNascimento;
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos;
+	@OneToMany(mappedBy = "cliente")
+	private List<Endereco> enderecos;
 
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, @NotNull String nome, @CPF @NotNull String cpf, @NotNull LocalDate dataNascimento,
-			@NotNull String telefone, @NotNull String email, @NotNull String password, List<Pedido> pedidos,
-			List<Endereco> enderecos) {
-		super();
+	public Cliente(Integer id, String nome, String cpf, String telefone, LocalDate dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
-		this.email = email;
-		this.password = password;
-//		this.pedidos = pedidos;
-//		this.enderecos = enderecos;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -88,27 +83,19 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public String getEmail() {
-		return email;
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
-	public String getPassword() {
-		return password;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
-
-//	public List<Pedido> getPedido() {
-//		return pedidos;
-//	}
-//
-//	public void setPedido(List<Pedido> pedido) {
-//		this.pedidos = pedido;
-//	}
 }

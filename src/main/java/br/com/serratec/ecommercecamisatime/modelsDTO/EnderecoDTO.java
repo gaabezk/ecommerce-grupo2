@@ -3,7 +3,6 @@ package br.com.serratec.ecommercecamisatime.modelsDTO;
 public class EnderecoDTO {
     private String cep,numero,complento;
 
-
     public EnderecoDTO() {
     }
 

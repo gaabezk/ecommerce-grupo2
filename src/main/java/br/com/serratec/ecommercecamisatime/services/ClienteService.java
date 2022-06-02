@@ -1,14 +1,15 @@
 package br.com.serratec.ecommercecamisatime.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Cliente;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import br.com.serratec.ecommercecamisatime.repositorios.ClienteRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {

@@ -2,8 +2,6 @@ package br.com.serratec.ecommercecamisatime.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 public class Endereco {
@@ -31,13 +29,17 @@ public class Endereco {
 
     @Column(name = "cidade")
     private String cidade;
+
+    @Column(name = "estado")
+    private String estado;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public Endereco() {
     }
-    public Endereco(Integer idEndereco, String cep, String rua, String numero, String complemento, String bairro, String cidade) {
+    public Endereco(Integer idEndereco, String cep, String rua, String numero, String complemento, String bairro, String cidade, String estado) {
         this.idEndereco = idEndereco;
         this.cep = cep;
         this.rua = rua;
@@ -45,13 +47,14 @@ public class Endereco {
         this.complemento = complemento;
         this.bairro = bairro;
         this.cidade = cidade;
+        this.estado = estado;
     }
 
-    public Integer getId() {
+    public Integer getIdEndereco() {
         return idEndereco;
     }
 
-    public void setId(Integer id) {
+    public void setIdEndereco(Integer idEndereco) {
         this.idEndereco = idEndereco;
     }
 
@@ -101,5 +104,21 @@ public class Endereco {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
