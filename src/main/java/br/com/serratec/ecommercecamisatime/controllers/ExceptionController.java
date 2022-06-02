@@ -14,6 +14,6 @@ public class ExceptionController {
     public ResponseEntity<?> idNotFoundException(IdNotFoundException e){
         HttpHeaders headers = new HttpHeaders();
         headers.add(e.m1(), e.m2());
-        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(null,headers, HttpStatus.NOT_FOUND);
     }
 }

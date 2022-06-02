@@ -31,8 +31,8 @@ public class ClienteController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente) {
-		clienteService.insert(cliente);
+	public ResponseEntity<Cliente> cadastro(@RequestBody Cliente cliente) {
+		clienteService.cadastro(cliente);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
 		return new ResponseEntity<>(cliente, headers, HttpStatus.CREATED);

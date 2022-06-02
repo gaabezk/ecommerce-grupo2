@@ -29,8 +29,13 @@ public class ClienteService {
 		return optional.get();
 	}
 
-	public void insert(Cliente cliente) {
-		clienteRepositorio.save(cliente);
+	public Cliente cadastro(Cliente cliente) {
+		Cliente newCliente = new Cliente();
+		newCliente.setNome(cliente.getNome());
+		newCliente.setCpf(cliente.getCpf());
+		newCliente.setTelefone(cliente.getTelefone());
+		newCliente.setDataNascimento(cliente.getDataNascimento());
+		clienteRepositorio.save(newCliente); 
+		return cliente;
 	}
-
 }
