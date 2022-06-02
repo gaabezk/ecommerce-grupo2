@@ -2,16 +2,17 @@ package br.com.serratec.ecommercecamisatime.modelsDTO;
 
 public class ViaCepDTO {
 
-    private String cep,logradouro,bairro,localidade;
+    private String cep,logradouro,bairro,localidade,uf;
 
     public ViaCepDTO() {
     }
 
-    public ViaCepDTO(String cep, String logradouro, String bairro, String localidade) {
+    public ViaCepDTO(String cep, String logradouro, String bairro, String localidade, String uf) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.localidade = localidade;
+        this.uf = uf;
     }
 
     public String getCep() {
@@ -44,5 +45,13 @@ public class ViaCepDTO {
 
     public void setLocalidade(String localidade) {
         this.localidade = localidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 }
