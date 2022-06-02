@@ -11,75 +11,63 @@ import java.time.LocalDate;
 
 public class ClienteDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotNull
-    private String nome;
-    @CPF
-    @NotNull
-    private String cpf;
-    @NotNull
-    private String telefone;
-    @NotNull
-    private LocalDate dataNascimento;
+	@NotNull
+	private String nome;
+	@CPF
+	@NotNull
+	private String cpf;
+	@NotNull
+	private String telefone;
+	@NotNull
+	private LocalDate dataNascimento;
 
-    public ClienteDTO() {
-    }
+	public ClienteDTO() {
+	}
 
-    public ClienteDTO(Integer id, String nome, String cpf, String telefone, LocalDate dataNascimento) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.dataNascimento = dataNascimento;
-    }
+	public ClienteDTO(String nome, String cpf, String telefone, LocalDate dataNascimento) {
 
-    public ClienteDTO(Cliente cliente) {
-        this.id = cliente.getId();
-        this.nome = cliente.getNome();
-        this.cpf = cliente.getCpf();
-        this.telefone = cliente.getTelefone();
-        this.dataNascimento = cliente.getDataNascimento();
-    }
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
+		this.dataNascimento = dataNascimento;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public ClienteDTO(Cliente cliente) {
+		this.nome = cliente.getNome();
+		this.cpf = cliente.getCpf();
+		this.telefone = cliente.getTelefone();
+		this.dataNascimento = cliente.getDataNascimento();
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public String getTelefone() {
+		return telefone;
+	}
 
-    public String getTelefone() {
-        return telefone;
-    }
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 }
