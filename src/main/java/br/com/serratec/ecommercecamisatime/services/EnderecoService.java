@@ -20,6 +20,9 @@ public class EnderecoService {
     @Autowired
     RestViaCep restViaCep;
 
+    @Autowired
+    ClienteService clienteService;
+
     public List<Endereco> findAll(){
         return enderecoRepositorio.findAll();
     }
@@ -30,9 +33,11 @@ public class EnderecoService {
         }
         return optional.get();
     }
-    public Endereco create(Endereco enderecoDTO){
+    public Endereco create(Endereco enderecoDTO) throws IdNotFoundException {
         ViaCepDTO enderecoNovo = restViaCep.getViaCep(enderecoDTO.getCep());
         Endereco endereco = new Endereco();
+
+        endereco.setCliente(clienteService.listarPorId(enderecoDTO.getCliente().getId()));
 
         endereco.setRua(enderecoNovo.getLogradouro());
         endereco.setCidade(enderecoNovo.getLocalidade());

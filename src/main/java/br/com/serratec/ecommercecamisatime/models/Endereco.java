@@ -1,5 +1,7 @@
 package br.com.serratec.ecommercecamisatime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -33,13 +35,14 @@ public class Endereco {
     @Column(name = "estado")
     private String estado;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public Endereco() {
     }
-    public Endereco(Integer idEndereco, String cep, String rua, String numero, String complemento, String bairro, String cidade, String estado) {
+    public Endereco(Integer idEndereco, String cep, String rua, String numero, String complemento, String bairro, String cidade, String estado, Cliente cliente) {
         this.idEndereco = idEndereco;
         this.cep = cep;
         this.rua = rua;
