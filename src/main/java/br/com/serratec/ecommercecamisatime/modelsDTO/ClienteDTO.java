@@ -1,13 +1,12 @@
 package br.com.serratec.ecommercecamisatime.modelsDTO;
 
 import br.com.serratec.ecommercecamisatime.models.Cliente;
+import br.com.serratec.ecommercecamisatime.models.Endereco;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 public class ClienteDTO {
 
@@ -32,7 +31,7 @@ public class ClienteDTO {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public ClienteDTO(Cliente cliente) {
+	public ClienteDTO(@NotNull Cliente cliente) {
 		this.nome = cliente.getNome();
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
@@ -70,4 +69,5 @@ public class ClienteDTO {
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
 }

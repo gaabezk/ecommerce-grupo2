@@ -1,5 +1,6 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
+import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,4 +17,13 @@ public class ExceptionController {
         headers.add(e.m1(), e.m2());
         return new ResponseEntity<>(null,headers, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(CpfExistentException.class)
+    public ResponseEntity<?> cpfExistentException(CpfExistentException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(e.m1(), e.m2());
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
+
+
 }
