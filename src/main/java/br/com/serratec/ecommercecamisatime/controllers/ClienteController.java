@@ -1,9 +1,8 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
 import java.util.List;
-
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
-import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.CriarContaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import br.com.serratec.ecommercecamisatime.models.Cliente;
 import br.com.serratec.ecommercecamisatime.services.ClienteService;
 
 import javax.validation.Valid;
-
 
 @RestController
 @RequestMapping("/Cliente")
@@ -36,10 +34,17 @@ public class ClienteController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody ClienteDTO clienteDTO) throws CpfExistentException {
+	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody CriarContaDTO clienteDTO) throws CpfExistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
 		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);
 	}
 
+//	@PostMapping
+//	public ResponseEntity<CriarContaDTO> criarConta(@Valid @RequestBody CriarContaDTO clienteDTO)
+//			throws CpfExistentException {
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
+//		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);
+//	}
 }

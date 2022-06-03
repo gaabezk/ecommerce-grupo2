@@ -1,14 +1,14 @@
 package br.com.serratec.ecommercecamisatime.modelsDTO;
 
-import br.com.serratec.ecommercecamisatime.models.Cliente;
-import br.com.serratec.ecommercecamisatime.models.Endereco;
-import org.hibernate.validator.constraints.br.CPF;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.util.List;
 
-public class ClienteDTO {
+import org.hibernate.validator.constraints.br.CPF;
+
+import br.com.serratec.ecommercecamisatime.models.Cliente;
+
+public class CriarContaDTO {
 
 	@NotNull
 	private String nome;
@@ -20,22 +20,33 @@ public class ClienteDTO {
 	@NotNull
 	private LocalDate dataNascimento;
 
-	public ClienteDTO() {
+	EnderecoDTO enderecoDto = new EnderecoDTO();
+
+	public CriarContaDTO() {
 	}
 
-	public ClienteDTO(String nome, String cpf, String telefone, LocalDate dataNascimento) {
+	public CriarContaDTO(String nome, String cpf, String telefone, LocalDate dataNascimento, EnderecoDTO enderecoDto) {
 
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.dataNascimento = dataNascimento;
+		this.enderecoDto = enderecoDto;
 	}
 
-	public ClienteDTO(@NotNull Cliente cliente) {
+	public CriarContaDTO(@NotNull Cliente cliente) {
 		this.nome = cliente.getNome();
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
+	}
+
+	public EnderecoDTO getEnderecoDto() {
+		return enderecoDto;
+	}
+
+	public void setEnderecoDto(EnderecoDTO enderecoDto) {
+		this.enderecoDto = enderecoDto;
 	}
 
 	public String getNome() {
