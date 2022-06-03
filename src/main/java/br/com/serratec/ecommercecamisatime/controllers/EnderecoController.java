@@ -24,7 +24,7 @@ public class EnderecoController {
         return enderecoService.findById(id);
     }
     @PostMapping
-    public Endereco create(@RequestBody Endereco endereco){
+    public Endereco create(@RequestBody Endereco endereco) throws IdNotFoundException {
         return enderecoService.create(endereco);
     }
 

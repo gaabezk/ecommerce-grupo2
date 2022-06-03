@@ -2,11 +2,9 @@ package br.com.serratec.ecommercecamisatime.models;
 
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+@Entity
 public class Categoria {
 	
 		@Id
@@ -14,7 +12,7 @@ public class Categoria {
 		private Integer id;
 		private String nome;
 		
-		@OneToMany(mappedBy = "produto")
+		@OneToMany(mappedBy = "categoria")
 		private List<Produto> produtos;
 		
 		public Categoria() {
