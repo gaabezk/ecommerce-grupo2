@@ -1,6 +1,9 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
 import java.util.List;
+
+import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Cliente;
 import br.com.serratec.ecommercecamisatime.services.ClienteService;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -26,16 +31,15 @@ public class ClienteController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> getById(@PathVariable Integer id) throws IdNotFoundException {
+	public ResponseEntity<Cliente> getById(@Valid @PathVariable Integer id) throws IdNotFoundException {
 		return new ResponseEntity<Cliente>(clienteService.listarPorId(id), HttpStatus.FOUND);
 	}
 
 	@PostMapping
-	public ResponseEntity<Cliente> cadastro(@RequestBody Cliente cliente) {
-		clienteService.cadastro(cliente);
+	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody ClienteDTO clienteDTO) throws CpfExistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
-		return new ResponseEntity<>(cliente, headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);
 	}
 
 }

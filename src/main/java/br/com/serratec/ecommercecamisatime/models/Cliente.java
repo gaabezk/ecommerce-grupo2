@@ -1,6 +1,7 @@
 package br.com.serratec.ecommercecamisatime.models;
 
 
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -41,6 +42,14 @@ public class Cliente {
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
+	}
+
+	public Cliente(ClienteDTO clienteDTO){
+		this.nome = clienteDTO.getNome();
+		this.cpf = clienteDTO.getCpf();
+		this.dataNascimento = clienteDTO.getDataNascimento();
+		this.telefone = clienteDTO.getTelefone();
+
 	}
 
 	public Integer getId() {
