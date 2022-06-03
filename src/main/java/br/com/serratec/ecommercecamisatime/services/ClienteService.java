@@ -1,6 +1,7 @@
 package br.com.serratec.ecommercecamisatime.services;
 
 
+import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Cliente;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
@@ -29,13 +30,15 @@ public class ClienteService {
 		return optional.get();
 	}
 
-	public Cliente cadastro(Cliente cliente) {
-		Cliente newCliente = new Cliente();
-		newCliente.setNome(cliente.getNome());
-		newCliente.setCpf(cliente.getCpf());
-		newCliente.setTelefone(cliente.getTelefone());
-		newCliente.setDataNascimento(cliente.getDataNascimento());
-		clienteRepositorio.save(newCliente); 
-		return cliente;
+	public void verificarCpf(String cpf) throws CpfExistentException {
+		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
+		if (optional.isPresent()) {
+			throw new CpfExistentException();
+		}
+	}
+
+	public Cliente cadastro(ClienteDTO clienteDTO) throws CpfExistentException {
+		verificarCpf(clienteDTO.getCpf());
+		return clienteRepositorio.save(new Cliente(clienteDTO));
 	}
 }

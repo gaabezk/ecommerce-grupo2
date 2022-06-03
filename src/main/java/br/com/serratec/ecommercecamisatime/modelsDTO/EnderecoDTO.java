@@ -1,15 +1,15 @@
 package br.com.serratec.ecommercecamisatime.modelsDTO;
 
 public class EnderecoDTO {
-    private String cep,numero,complento;
+    private String cep,numero, complemento;
 
     public EnderecoDTO() {
     }
 
-    public EnderecoDTO(String cep, String numero, String complento) {
+    public EnderecoDTO(String cep, String numero, String complemento) {
         this.cep = cep;
         this.numero = numero;
-        this.complento = complento;
+        this.complemento = complemento;
     }
 
     public String getCep() {
@@ -28,11 +28,11 @@ public class EnderecoDTO {
         this.numero = numero;
     }
 
-    public String getComplento() {
-        return complento;
+    public String getComplemento() {
+        return complemento;
     }
 
-    public void setComplento(String complento) {
-        this.complento = complento;
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 }
