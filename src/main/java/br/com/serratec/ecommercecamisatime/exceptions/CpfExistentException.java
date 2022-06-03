@@ -6,7 +6,7 @@ public class CpfExistentException extends Exception {
         return "ERROR-CADASTRO";
     }
     public String m2() {
-        return "CPF EXISTENTE";
+        return "CPF JA CADASTRADO";
     }
 
 }
