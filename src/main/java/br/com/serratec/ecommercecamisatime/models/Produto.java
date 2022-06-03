@@ -38,6 +38,11 @@ public class Produto {
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
+    
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+    
     public Produto() {
     }
     public Produto(Integer id, String nome, String descricao, String tamanho, String time, String genero, Integer quantidade, Double valor, Pedido pedido) {

@@ -21,7 +21,8 @@ public class Pedido {
 
     public Pedido() {
     }
-    public Pedido(Integer id, LocalDateTime dataHora, List<Produto> produtos) {
+    public Pedido(Cliente cliente, Integer id, LocalDateTime dataHora, List<Produto> produtos) {
+    	this.cliente = cliente;
         this.id = id;
         this.dataHora = dataHora;
         this.produtos = produtos;

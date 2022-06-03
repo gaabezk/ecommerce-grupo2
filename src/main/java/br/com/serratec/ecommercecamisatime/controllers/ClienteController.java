@@ -39,12 +39,4 @@ public class ClienteController {
 		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
 		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);
 	}
-
-//	@PostMapping
-//	public ResponseEntity<CriarContaDTO> criarConta(@Valid @RequestBody CriarContaDTO clienteDTO)
-//			throws CpfExistentException {
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
-//		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);
-//	}
 }
