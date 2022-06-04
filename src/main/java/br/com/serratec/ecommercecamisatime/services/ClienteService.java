@@ -3,7 +3,7 @@ package br.com.serratec.ecommercecamisatime.services;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Cliente;
-import br.com.serratec.ecommercecamisatime.modelsDTO.CriarContaDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import br.com.serratec.ecommercecamisatime.repositorios.ClienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class ClienteService {
 		}
 	}
 
-	public Cliente cadastro(CriarContaDTO clienteDTO) throws CpfExistentException {
+	public Cliente cadastro(ClienteDTO clienteDTO) throws CpfExistentException {
 		verificarCpf(clienteDTO.getCpf());
 		return clienteRepositorio.save(new Cliente(clienteDTO));
 	}
