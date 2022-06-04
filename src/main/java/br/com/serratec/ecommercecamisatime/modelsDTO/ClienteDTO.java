@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.serratec.ecommercecamisatime.models.Cliente;
 
-public class CriarContaDTO {
+public class ClienteDTO {
 
 	@NotNull
 	private String nome;
@@ -20,34 +20,34 @@ public class CriarContaDTO {
 	@NotNull
 	private LocalDate dataNascimento;
 
-	EnderecoDTO enderecoDto = new EnderecoDTO();
+	//EnderecoDTO enderecoDto = new EnderecoDTO();
 
-	public CriarContaDTO() {
+	public ClienteDTO() {
 	}
 
-	public CriarContaDTO(String nome, String cpf, String telefone, LocalDate dataNascimento, EnderecoDTO enderecoDto) {
+	public ClienteDTO(String nome, String cpf, String telefone, LocalDate dataNascimento/*, EnderecoDTO enderecoDto*/) {
 
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.dataNascimento = dataNascimento;
-		this.enderecoDto = enderecoDto;
+		/*this.enderecoDto = enderecoDto;*/
 	}
 
-	public CriarContaDTO(@NotNull Cliente cliente) {
+	public ClienteDTO(@NotNull Cliente cliente) {
 		this.nome = cliente.getNome();
 		this.cpf = cliente.getCpf();
 		this.telefone = cliente.getTelefone();
 		this.dataNascimento = cliente.getDataNascimento();
 	}
 
-	public EnderecoDTO getEnderecoDto() {
+/*	public EnderecoDTO getEnderecoDto() {
 		return enderecoDto;
 	}
 
 	public void setEnderecoDto(EnderecoDTO enderecoDto) {
 		this.enderecoDto = enderecoDto;
-	}
+	}*/
 
 	public String getNome() {
 		return nome;

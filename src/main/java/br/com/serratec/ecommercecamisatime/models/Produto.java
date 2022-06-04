@@ -1,7 +1,9 @@
 package br.com.serratec.ecommercecamisatime.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "produto")
@@ -9,48 +11,55 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-//    @NotNull
+    @NotNull
     @Size(max = 60)
     @Column(name = "nome")
     private String nome;
-//    @NotNull
+    @NotNull
     @Size(max = 80)
     @Column(name = "descricao")
     private String descricao;
-//    @NotNull
+    @NotNull
     @Size(max = 80)
     @Column(name = "tamanho")
     private String tamanho;
-//    @NotNull
-    @Size(max = 80)
-    @Column(name = "time")
-    private String time;
-//    @NotNull
+    @NotNull
     @Size(max = 80)
     @Column(name = "genero")
     private String genero;
-//    @NotNull
+    @NotNull
     @Column(name = "quantidade")
     private Integer quantidade;
-//    @NotNull
+    @NotNull
+    @Column(name = "dataCadastro")
+    private LocalDateTime dataCadastro;
+    @NotNull
     @Column(name = "valor")
     private Double valor;
+    /*
+    @NotNull
+    @Column(name = "imagem")
+    private Double imagem;
+    */
+
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
+
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
-    
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     
     public Produto() {
     }
-    public Produto(Integer id, String nome, String descricao, String tamanho, String time, String genero, Integer quantidade, Double valor, Pedido pedido) {
+    public Produto(Integer id, String nome, String descricao, String tamanho, String genero, Integer quantidade, Double valor, Pedido pedido) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.tamanho = tamanho;
-        this.time = time;
         this.genero = genero;
         this.quantidade = quantidade;
         this.valor = valor;
@@ -87,14 +96,6 @@ public class Produto {
 
     public void setTamanho(String tamanho) {
         this.tamanho = tamanho;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getGenero() {

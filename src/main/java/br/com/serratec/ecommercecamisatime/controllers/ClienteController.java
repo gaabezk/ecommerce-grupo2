@@ -2,7 +2,7 @@ package br.com.serratec.ecommercecamisatime.controllers;
 
 import java.util.List;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
-import br.com.serratec.ecommercecamisatime.modelsDTO.CriarContaDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class ClienteController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody CriarContaDTO clienteDTO) throws CpfExistentException {
+	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody ClienteDTO clienteDTO) throws CpfExistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
 		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);

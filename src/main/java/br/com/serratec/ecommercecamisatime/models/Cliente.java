@@ -1,10 +1,11 @@
 package br.com.serratec.ecommercecamisatime.models;
 
-import br.com.serratec.ecommercecamisatime.modelsDTO.CriarContaDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,12 +26,16 @@ public class Cliente {
 	@Column(name = "telefone")
 	private String telefone;
 	@NotNull
+	@Past
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos;
+	@NotNull
+	@OneToOne(cascade = CascadeType.ALL)
+	private Usuario usuario;
 
 	public Cliente() {
 	}
@@ -43,12 +48,12 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public Cliente(CriarContaDTO clienteDTO) {
+	public Cliente(ClienteDTO clienteDTO) {
 		this.nome = clienteDTO.getNome();
 		this.cpf = clienteDTO.getCpf();
 		this.dataNascimento = clienteDTO.getDataNascimento();
 		this.telefone = clienteDTO.getTelefone();
-
+		this.usuario.setRole("cliente");
 	}
 
 	public Integer getId() {

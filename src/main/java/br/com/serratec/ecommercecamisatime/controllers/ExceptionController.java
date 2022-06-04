@@ -1,6 +1,7 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
 import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistenteException;
+import br.com.serratec.ecommercecamisatime.exceptions.CategoriaInexistenteException;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -32,5 +33,13 @@ public class ExceptionController {
         headers.add(e.m1(), e.m2());
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(CategoriaInexistenteException.class)
+    public ResponseEntity<?> categoriaInexistenteException(CategoriaInexistenteException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(e.m1(), e.m2());
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
+
 
 }
