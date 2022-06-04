@@ -29,7 +29,7 @@ public class ProdutoController {
 	public ResponseEntity<List<Produto>> getAll() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Lista de Produtos", "Segue a lista de produtos");
-		return new ResponseEntity<List<Produto>>(produtoService.listarProdutos(), headers, HttpStatus.valueOf(202));
+		return new ResponseEntity<List<Produto>>(produtoService.listar(), headers, HttpStatus.valueOf(202));
 	}
 
 	@GetMapping("/{id}")
@@ -39,7 +39,7 @@ public class ProdutoController {
 
 	@PostMapping
 	public ResponseEntity<Produto> insert(@RequestBody Produto produto) {
-		produtoService.insert(produto);
+		produtoService.criar(produto);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir produto", "Insere um produto e retorna ele");
 		return new ResponseEntity<>(produto, headers, HttpStatus.CREATED);

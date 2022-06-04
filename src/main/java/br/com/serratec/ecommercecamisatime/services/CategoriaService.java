@@ -59,7 +59,7 @@ public class CategoriaService {
 		return repositorio.save(oldCategoria);
 	}
 
-	public void delete(String nome) throws CategoriaNonexistentException {
+	public void deletar(String nome) throws CategoriaNonexistentException {
 		Optional<Categoria> optional = repositorio.findByNome(nome);
 		if(optional.isEmpty()){
 			throw new CategoriaNonexistentException();

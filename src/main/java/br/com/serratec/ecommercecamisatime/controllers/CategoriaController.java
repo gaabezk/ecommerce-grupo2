@@ -47,7 +47,7 @@ public class CategoriaController {
 
 	@DeleteMapping
 	public ResponseEntity<String> deletar(@Valid @RequestBody String nome) throws CategoriaNonexistentException {
-		categoriaService.delete(nome);
+		categoriaService.deletar(nome);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Deletar categoria", "Deleta uma categoria");
 		return new ResponseEntity<>("deletado!",headers, HttpStatus.valueOf(202));

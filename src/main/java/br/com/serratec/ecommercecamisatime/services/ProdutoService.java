@@ -15,7 +15,7 @@ public class ProdutoService {
 	@Autowired
 	ProdutoRepositorio produtoRepositorio;
 
-	public List<Produto> listarProdutos() {
+	public List<Produto> listar() {
 		return produtoRepositorio.findAll();
 	}
 
@@ -27,7 +27,7 @@ public class ProdutoService {
 		return optional.get();
 	}
 
-	public void insert(Produto produto) {
+	public void criar(Produto produto) {
 		produtoRepositorio.save(produto);
 	}
 }
