@@ -3,12 +3,12 @@ package br.com.serratec.ecommercecamisatime.services;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaInexistenteException;
+import br.com.serratec.ecommercecamisatime.exceptions.CategoriaNonexistentException;
 import br.com.serratec.ecommercecamisatime.modelsDTO.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistenteException;
+import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Categoria;
 import br.com.serratec.ecommercecamisatime.repositorios.CategoriaRepositorio;
@@ -31,22 +31,22 @@ public class CategoriaService {
 		return optional.get();
 	}
 	
-	public void verificar(String nomeCategoria) throws CategoriaExistenteException {
+	public void verificar(String nomeCategoria) throws CategoriaExistentException {
 		Optional<Categoria> optional = repositorio.findByNome(nomeCategoria);
 		if(optional.isPresent()) {
-			throw new CategoriaExistenteException();
+			throw new CategoriaExistentException();
 		}
 	}
 	
-	public Categoria criar(Categoria categoria) throws CategoriaExistenteException {
+	public Categoria criar(Categoria categoria) throws CategoriaExistentException {
 		verificar(categoria.getNome());
 		return repositorio.save(categoria);
 	}
 
-	public Categoria alterar(CategoriaDTO categoria, String nome) throws CategoriaInexistenteException {
+	public Categoria alterar(CategoriaDTO categoria, String nome) throws CategoriaNonexistentException {
 		Optional<Categoria> optional = repositorio.findByNome(nome);
 		if(optional.isEmpty()){
-			throw new CategoriaInexistenteException();
+			throw new CategoriaNonexistentException();
 		}
 		Categoria oldCategoria = optional.get();
 
@@ -59,10 +59,10 @@ public class CategoriaService {
 		return repositorio.save(oldCategoria);
 	}
 
-	public void delete(String nome) throws CategoriaInexistenteException {
+	public void delete(String nome) throws CategoriaNonexistentException {
 		Optional<Categoria> optional = repositorio.findByNome(nome);
 		if(optional.isEmpty()){
-			throw new CategoriaInexistenteException();
+			throw new CategoriaNonexistentException();
 		}
 		repositorio.delete(optional.get());
 	}

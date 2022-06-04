@@ -1,8 +1,9 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistenteException;
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaInexistenteException;
+import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistentException;
+import br.com.serratec.ecommercecamisatime.exceptions.CategoriaNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
+import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,15 +28,22 @@ public class ExceptionController {
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CategoriaExistenteException.class)
-    public ResponseEntity<?> categoriaExistenteException(CategoriaExistenteException e){
+    @ExceptionHandler(CategoriaExistentException.class)
+    public ResponseEntity<?> categoriaExistenteException(CategoriaExistentException e){
         HttpHeaders headers = new HttpHeaders();
         headers.add(e.m1(), e.m2());
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CategoriaInexistenteException.class)
-    public ResponseEntity<?> categoriaInexistenteException(CategoriaInexistenteException e){
+    @ExceptionHandler(CategoriaNonexistentException.class)
+    public ResponseEntity<?> categoriaInexistenteException(CategoriaNonexistentException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(e.m1(), e.m2());
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(CpfNonexistentException.class)
+    public ResponseEntity<?> cpfNonexistentException(CpfNonexistentException e){
         HttpHeaders headers = new HttpHeaders();
         headers.add(e.m1(), e.m2());
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);

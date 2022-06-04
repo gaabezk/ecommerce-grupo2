@@ -1,6 +1,6 @@
 package br.com.serratec.ecommercecamisatime.exceptions;
 
-public class CategoriaExistenteException extends Exception {
+public class CategoriaExistentException extends Exception {
 	public String m1() {
 		return "ERRO";
 	}

@@ -31,21 +31,20 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String email, String username, String senha, String role, Cliente cliente, Funcionario funcionario) {
+    public Usuario(Integer id, String email, String username, String senha, String role, Cliente cliente) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.senha = senha;
-        this.role = role;
+        this.role = "cliente";
         this.cliente = cliente;
-        this.funcionario = funcionario;
     }
-    public Usuario(Integer id, String email, String username, String senha, String role,Funcionario funcionario) {
+    public Usuario(Integer id, String email, String username, String senha, String role, Funcionario funcionario) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.senha = senha;
-        this.role = role;
+        this.role = "funcionario";
         this.funcionario = funcionario;
     }
 

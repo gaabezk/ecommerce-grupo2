@@ -33,7 +33,7 @@ public class Cliente {
 	private List<Pedido> pedidos;
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos;
-	@NotNull
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 
@@ -53,7 +53,7 @@ public class Cliente {
 		this.cpf = clienteDTO.getCpf();
 		this.dataNascimento = clienteDTO.getDataNascimento();
 		this.telefone = clienteDTO.getTelefone();
-		this.usuario.setRole("cliente");
+		//this.usuario.setRole("cliente");
 	}
 
 	public Integer getId() {
