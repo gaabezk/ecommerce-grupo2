@@ -1,68 +1,32 @@
-package br.com.serratec.ecommercecamisatime.models;
+package br.com.serratec.ecommercecamisatime.modelsDTO;
 
-import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
+import br.com.serratec.ecommercecamisatime.models.Categoria;
+import br.com.serratec.ecommercecamisatime.models.Funcionario;
+import br.com.serratec.ecommercecamisatime.models.Produto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.Instant;
 
-@Entity
-@Table(name = "produto")
-public class Produto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotNull
-    @Size(max = 60)
-    @Column(name = "nome")
-    private String nome;
-    @NotNull
-    @Size(max = 80)
-    @Column(name = "descricao")
-    private String descricao;
-    @NotNull
-    @Size(max = 80)
-    @Column(name = "tamanho")
-    private String tamanho;
-    @NotNull
-    @Size(max = 80)
-    @Column(name = "genero")
-    private String genero;
-    @NotNull
-    @Column(name = "quantidade")
-    private Integer quantidadeEstoque;
-    @NotNull
-    @Column(name = "dataCadastro")
-    private Instant dataCadastro;
-    @NotNull
-    @Column(name = "valor")
-    private Double valor;
-    /*
-    @NotNull
-    @Column(name = "imagem")
-    private Double imagem;
-    */
+public class ProdutoDTO {
 
-    @ManyToOne
-    @JoinColumn(name = "funcionario_id")
+    private String nome;
+    private String descricao;
+    private String tamanho;
+    private String genero;
+    private Integer quantidadeEstoque;
+    private Instant dataCadastro;
+    private Double valor;
+
+    @JsonIgnore
     private Funcionario funcionario;
 
-
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
-
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @JsonIgnore
     private Categoria categoria;
-    
-    public Produto() {
+
+    public ProdutoDTO() {
     }
 
-    public Produto(Integer id, String nome, String descricao, String tamanho, String genero, Integer quantidadeEstoque, Instant dataCadastro, Double valor, Funcionario funcionario,  Categoria categoria) {
-        this.id = id;
+    public ProdutoDTO(String nome, String descricao, String tamanho, String genero, Integer quantidadeEstoque, Instant dataCadastro, Double valor, Funcionario funcionario, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.tamanho = tamanho;
@@ -73,7 +37,7 @@ public class Produto {
         this.funcionario = funcionario;
         this.categoria = categoria;
     }
-    public Produto(ProdutoDTO produto) {
+    public ProdutoDTO(Produto produto) {
         this.nome = produto.getNome();
         this.descricao = produto.getDescricao();
         this.tamanho = produto.getTamanho();
@@ -83,14 +47,6 @@ public class Produto {
         this.valor = produto.getValor();
         this.funcionario = produto.getFuncionario();
         this.categoria = produto.getCategoria();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -155,14 +111,6 @@ public class Produto {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
     }
 
     public Categoria getCategoria() {

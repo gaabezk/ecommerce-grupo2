@@ -18,19 +18,17 @@ public class Funcionario{
     @NotNull
     @Column(name = "nome")
     private String nome;
+    @CPF
     @NotNull
     @Column(name = "cpf", unique = true)
-    @CPF
     private String cpf;
-
     @NotNull
     @Column(name = "telefone")
     private String telefone;
     @NotNull
-    @Column(name = "data_nascimento")
     @Past
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
@@ -51,7 +49,7 @@ public class Funcionario{
         this.cpf = funcionarioDTO.getCpf();
         this.dataNascimento = funcionarioDTO.getDataNascimento();
         this.telefone = funcionarioDTO.getTelefone();
-        this.usuario.setRole("funcionario");
+        //this.usuario.setRole("funcionario");
     }
 
 

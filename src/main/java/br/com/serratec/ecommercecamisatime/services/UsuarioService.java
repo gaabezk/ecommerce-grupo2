@@ -41,12 +41,12 @@ public class UsuarioService {
 		}
 	}
 
-	public Usuario cadastro(Usuario usuario, Cliente cliente) throws CpfExistentException {
+	/*public Usuario cadastro(Usuario usuario, Cliente cliente) throws CpfExistentException {
 		//verificarCpf(clienteDTO.getCpf());
 		return usuarioRepositorio.save(new Usuario(usuario));
 	}
 	
-	/*public Cliente alterar(ClienteDTO clienteDTO, String cpf) throws CpfNonexistentException {
+	public Cliente alterar(ClienteDTO clienteDTO, String cpf) throws CpfNonexistentException {
 		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
 		if(optional.isEmpty()){
 			throw new CpfNonexistentException();

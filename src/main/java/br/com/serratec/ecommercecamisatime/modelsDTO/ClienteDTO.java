@@ -4,21 +4,23 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import br.com.serratec.ecommercecamisatime.models.Cliente;
 
 public class ClienteDTO {
 
-	@NotNull
+
 	private String nome;
-	@CPF
-	@NotNull
 	private String cpf;
-	@NotNull
 	private String telefone;
-	@NotNull
 	private LocalDate dataNascimento;
+
+
+	private String email;
+	private String username;
+	private String senha;
+	private String role;
+
+
 
 	//EnderecoDTO enderecoDto = new EnderecoDTO();
 

@@ -1,6 +1,8 @@
 package br.com.serratec.ecommercecamisatime.services;
 
+import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
+import br.com.serratec.ecommercecamisatime.modelsDTO.EnderecoDTO;
 import br.com.serratec.ecommercecamisatime.restClient.RestViaCep;
 import br.com.serratec.ecommercecamisatime.models.Endereco;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ViaCepDTO;
@@ -16,10 +18,8 @@ public class EnderecoService {
 
     @Autowired
     EnderecoRepositorio enderecoRepositorio;
-
     @Autowired
     RestViaCep restViaCep;
-
     @Autowired
     ClienteService clienteService;
 
@@ -33,19 +33,14 @@ public class EnderecoService {
         }
         return optional.get();
     }
-    public Endereco create(Endereco enderecoDTO) throws IdNotFoundException {
+    public Endereco create(EnderecoDTO enderecoDTO) throws CpfNonexistentException {
+
         ViaCepDTO enderecoNovo = restViaCep.getViaCep(enderecoDTO.getCep());
-        Endereco endereco = new Endereco();
 
-        endereco.setCliente(clienteService.listarPorId(enderecoDTO.getCliente().getId()));
+        Endereco endereco = new Endereco(enderecoNovo,enderecoDTO);
 
-        endereco.setRua(enderecoNovo.getLogradouro());
-        endereco.setCidade(enderecoNovo.getLocalidade());
-        endereco.setCep(enderecoNovo.getCep());
-        endereco.setBairro(enderecoNovo.getBairro());
-        endereco.setNumero(enderecoDTO.getNumero());
-        endereco.setComplemento(enderecoDTO.getComplemento());
-        endereco.setEstado(enderecoNovo.getUf());
+        endereco.setCliente(clienteService.listarPorCpf(enderecoDTO.getCliente().getCpf()));
+
 
         return  enderecoRepositorio.save(endereco);
     }

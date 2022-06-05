@@ -31,7 +31,7 @@ public class Cliente {
 	private LocalDate dataNascimento;
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
 
 	@OneToOne(cascade = CascadeType.ALL)

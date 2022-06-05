@@ -32,6 +32,13 @@ public class ClienteService {
 		}
 		return optional.get();
 	}
+	public Cliente listarPorCpf(String cpf) throws CpfNonexistentException{
+		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
+		if (optional.isEmpty()) {
+			throw new CpfNonexistentException();
+		}
+		return optional.get();
+	}
 
 	public void verificarCpf(String cpf) throws CpfExistentException {
 		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
@@ -45,6 +52,22 @@ public class ClienteService {
 		return clienteRepositorio.save(new Cliente(clienteDTO));
 	}
 	
+/*	public Cliente alterar(ClienteDTO clienteDTO, String cpf) throws CpfNonexistentException {
+		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
+		if(optional.isEmpty()){
+			throw new CpfNonexistentException();
+		}
+		Cliente oldCliente = optional.get();
+
+	if (clienteDTO.getEnderecoDto() != null) {
+			oldCliente.setEnderecoDto(clienteDTO.getEnderecoDto());
+		}
+		if (clienteDTO.getTelefone() != null) {
+			oldCliente.setTelefone(clienteDTO.getTelefone());
+		}
+		return clienteRepositorio.save(oldCliente);
+	}*/
+
 	public Cliente alterar(ClienteDTO clienteDTO, String cpf) throws CpfNonexistentException {
 		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
 		if(optional.isEmpty()){
@@ -52,9 +75,9 @@ public class ClienteService {
 		}
 		Cliente oldCliente = optional.get();
 
-	/**	if (clienteDTO.getEnderecoDto() != null) {
-			oldCliente.setEnderecoDto(clienteDTO.getEnderecoDto());
-		}**/
+		if (clienteDTO.getNome() != null) {
+			oldCliente.setNome(clienteDTO.getNome());
+		}
 		if (clienteDTO.getTelefone() != null) {
 			oldCliente.setTelefone(clienteDTO.getTelefone());
 		}

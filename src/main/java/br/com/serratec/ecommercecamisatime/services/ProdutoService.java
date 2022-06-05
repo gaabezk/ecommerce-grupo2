@@ -1,14 +1,12 @@
 package br.com.serratec.ecommercecamisatime.services;
 
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistentException;
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.exceptions.ProdutoExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.ProdutoNonexistentException;
 import br.com.serratec.ecommercecamisatime.models.Categoria;
-import br.com.serratec.ecommercecamisatime.models.Pedido;
 import br.com.serratec.ecommercecamisatime.models.Produto;
-import br.com.serratec.ecommercecamisatime.modelsDTO.CategoriaDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
+import br.com.serratec.ecommercecamisatime.repositorios.CategoriaRepositorio;
 import br.com.serratec.ecommercecamisatime.repositorios.ProdutoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,8 @@ public class ProdutoService {
 
 	@Autowired
 	ProdutoRepositorio produtoRepositorio;
+	@Autowired
+	CategoriaRepositorio categoriaRepositorio;
 
 	public List<Produto> listar() {
 		return produtoRepositorio.findAll();
@@ -33,17 +33,21 @@ public class ProdutoService {
 		}
 		return optional.get();
 	}
-	
-	public void verificar(Integer id) throws ProdutoExistentException{
-		Optional<Produto> optional = produtoRepositorio.findById(id);
+	public void verificar(String nome) throws ProdutoExistentException{
+		Optional<Produto> optional = produtoRepositorio.findByNome(nome);
 		if(optional.isPresent()) {
 			throw new ProdutoExistentException();
 		}
 	}
+	public Produto criar(ProdutoDTO produtoDTO,String categoria) throws ProdutoExistentException {
+		verificar(produtoDTO.getNome());
+		Optional<Categoria> optional = categoriaRepositorio.findByNome(categoria);
 
-	public Produto criar(Produto produto) throws ProdutoExistentException {
-		verificar(produto.getId());
-		return produtoRepositorio.save(produto);
+		Produto newProduto = new Produto(produtoDTO);
+
+		newProduto.setCategoria(optional.get());
+
+		return produtoRepositorio.save(newProduto);
 	}
 	
 	public Produto alterar(Produto produto) throws ProdutoNonexistentException {
@@ -65,8 +69,8 @@ public class ProdutoService {
 		if (produto.getGenero() != null) {
 			oldCategoria.setGenero(produto.getGenero());
 		}
-		if (produto.getQuantidade() != null) {
-			oldCategoria.setQuantidade(produto.getQuantidade());
+		if (produto.getQuantidadeEstoque() != null) {
+			oldCategoria.setQuantidadeEstoque(produto.getQuantidadeEstoque());
 		}
 		if (produto.getValor() != null) {
 			oldCategoria.setValor(produto.getValor());
