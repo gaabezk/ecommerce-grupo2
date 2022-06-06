@@ -2,10 +2,12 @@ package br.com.serratec.ecommercecamisatime.services;
 
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
+import br.com.serratec.ecommercecamisatime.exceptions.EmailExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Cliente;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import br.com.serratec.ecommercecamisatime.repositorios.ClienteRepositorio;
+import br.com.serratec.ecommercecamisatime.repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class ClienteService {
 
 	@Autowired
 	ClienteRepositorio clienteRepositorio;
+	@Autowired
+	UsuarioRepositorio usuarioRepositorio;
+
 
 	public List<Cliente> listarClientes() {
 		return clienteRepositorio.findAll();
@@ -44,10 +49,15 @@ public class ClienteService {
 		}
 	}
 
-	public Cliente cadastro(ClienteDTO clienteDTO) throws CpfExistentException {
+	public Cliente cadastro(ClienteDTO clienteDTO) throws CpfExistentException, EmailExistentException {
 		verificarCpf(clienteDTO.getCpf());
 
 		Cliente cliente = new Cliente(clienteDTO);
+
+		Optional<Cliente> optional = usuarioRepositorio.findByEmail(cliente.getUsuario().getEmail());
+		if (optional.isPresent()) {
+			throw new EmailExistentException();
+		}
 
 		return clienteRepositorio.save(cliente);
 	}

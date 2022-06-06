@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
 
-    public Optional<Cliente> findByCpf(String cpf);
+    Optional<Cliente> findByCpf(String cpf);
 
 }

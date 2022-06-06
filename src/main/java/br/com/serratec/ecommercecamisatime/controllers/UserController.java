@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
+import br.com.serratec.ecommercecamisatime.exceptions.EmailExistentException;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -36,7 +37,7 @@ public class UserController {
 	}
 
 	@PostMapping("/cliente")
-	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody ClienteDTO clienteDTO) throws CpfExistentException {
+	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody ClienteDTO clienteDTO) throws CpfExistentException, EmailExistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
 		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);

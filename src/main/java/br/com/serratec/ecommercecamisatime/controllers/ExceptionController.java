@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.NonUniqueResultException;
+
 @RestControllerAdvice
 public class ExceptionController {
 
@@ -46,6 +48,12 @@ public class ExceptionController {
     public ResponseEntity<?> cpfNonexistentException(CpfNonexistentException e){
         HttpHeaders headers = new HttpHeaders();
         headers.add(e.m1(), e.m2());
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(NonUniqueResultException.class)
+    public ResponseEntity<?> nonUniqueResultException(NonUniqueResultException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("ERRO", "EMAIL OU CPF JA UTILIZADOS");
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
 
