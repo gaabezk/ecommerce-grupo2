@@ -7,6 +7,6 @@ public class ProdutoNonexistentException extends Exception {
 	}
 	
 	public String m2() {
-		return "PRODUTO JÁ EXISTENTE";
+		return "PRODUTO NAO EXISTENTE";
 	}
 }

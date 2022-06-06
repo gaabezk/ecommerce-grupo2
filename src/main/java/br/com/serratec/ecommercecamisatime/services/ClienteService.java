@@ -22,7 +22,6 @@ public class ClienteService {
 	@Autowired
 	UsuarioRepositorio usuarioRepositorio;
 
-
 	public List<Cliente> listarClientes() {
 		return clienteRepositorio.findAll();
 	}
@@ -34,7 +33,8 @@ public class ClienteService {
 		}
 		return optional.get();
 	}
-	public Cliente listarPorCpf(String cpf) throws CpfNonexistentException{
+
+	public Cliente listarPorCpf(String cpf) throws CpfNonexistentException {
 		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
 		if (optional.isEmpty()) {
 			throw new CpfNonexistentException();
@@ -61,26 +61,10 @@ public class ClienteService {
 
 		return clienteRepositorio.save(cliente);
 	}
-	
-/*	public Cliente alterar(ClienteDTO clienteDTO, String cpf) throws CpfNonexistentException {
-		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
-		if(optional.isEmpty()){
-			throw new CpfNonexistentException();
-		}
-		Cliente oldCliente = optional.get();
-
-	if (clienteDTO.getEnderecoDto() != null) {
-			oldCliente.setEnderecoDto(clienteDTO.getEnderecoDto());
-		}
-		if (clienteDTO.getTelefone() != null) {
-			oldCliente.setTelefone(clienteDTO.getTelefone());
-		}
-		return clienteRepositorio.save(oldCliente);
-	}*/
 
 	public Cliente alterar(ClienteDTO clienteDTO, String cpf) throws CpfNonexistentException {
 		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
-		if(optional.isEmpty()){
+		if (optional.isEmpty()) {
 			throw new CpfNonexistentException();
 		}
 		Cliente oldCliente = optional.get();
@@ -93,10 +77,10 @@ public class ClienteService {
 		}
 		return clienteRepositorio.save(oldCliente);
 	}
-	
+
 	public void deletar(String cpf) throws CpfNonexistentException {
 		Optional<Cliente> optional = clienteRepositorio.findByCpf(cpf);
-		if(optional.isEmpty()){
+		if (optional.isEmpty()) {
 			throw new CpfNonexistentException();
 		}
 		clienteRepositorio.delete(optional.get());

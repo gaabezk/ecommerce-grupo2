@@ -3,7 +3,6 @@ package br.com.serratec.ecommercecamisatime.services;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Imagem;
 import br.com.serratec.ecommercecamisatime.models.Produto;
-import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
 import br.com.serratec.ecommercecamisatime.repositorios.ImagemRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

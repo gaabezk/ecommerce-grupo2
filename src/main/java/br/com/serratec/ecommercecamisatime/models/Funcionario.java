@@ -1,9 +1,7 @@
 package br.com.serratec.ecommercecamisatime.models;
 
-import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import br.com.serratec.ecommercecamisatime.modelsDTO.FuncionarioDTO;
 import org.hibernate.validator.constraints.br.CPF;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
