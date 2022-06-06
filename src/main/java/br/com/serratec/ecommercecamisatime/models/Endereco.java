@@ -36,7 +36,6 @@ public class Endereco {
 
     @Column(name = "estado")
     private String estado;
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")

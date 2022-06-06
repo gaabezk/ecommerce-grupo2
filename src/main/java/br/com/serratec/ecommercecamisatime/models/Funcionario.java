@@ -1,14 +1,17 @@
 package br.com.serratec.ecommercecamisatime.models;
 
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import br.com.serratec.ecommercecamisatime.modelsDTO.FuncionarioDTO;
 import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-public class Funcionario{
+public class Funcionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,30 +30,36 @@ public class Funcionario{
     @Past
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     public Funcionario() {
     }
 
-    public Funcionario(Integer id, String nome, String cpf, String telefone, LocalDate dataNascimento, Usuario usuario) {
+    public Funcionario(Integer id, String nome, String cpf, String telefone, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        this.telefone = telefone;
         this.dataNascimento = dataNascimento;
-        this.usuario = usuario;
+        this.telefone = telefone;
     }
 
     public Funcionario(FuncionarioDTO funcionarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario.setEmail(funcionarioDTO.getEmail());
+        usuario.setUsername(funcionarioDTO.getUsername());
+        usuario.setSenha(funcionarioDTO.getSenha());
+        usuario.setRole("funcionario");
+        usuario.setFuncionario(Funcionario.this);
+
         this.nome = funcionarioDTO.getNome();
         this.cpf = funcionarioDTO.getCpf();
         this.dataNascimento = funcionarioDTO.getDataNascimento();
         this.telefone = funcionarioDTO.getTelefone();
-        //this.usuario.setRole("funcionario");
+        this.usuario = usuario;
+
     }
-
-
     public Integer getId() {
         return id;
     }

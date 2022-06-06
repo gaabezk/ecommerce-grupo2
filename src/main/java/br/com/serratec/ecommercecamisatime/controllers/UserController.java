@@ -5,7 +5,10 @@ import java.util.List;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.EmailExistentException;
+import br.com.serratec.ecommercecamisatime.models.Funcionario;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.FuncionarioDTO;
+import br.com.serratec.ecommercecamisatime.services.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,12 @@ public class UserController {
 
 	@Autowired
 	ClienteService clienteService;
+
+	@Autowired
+	FuncionarioService funcionarioService;
+
+
+	//=================================================CLIENTE==========================================================
 
 	@GetMapping("/cliente")
 	public ResponseEntity<List<Cliente>> getAll() {
@@ -49,7 +58,7 @@ public class UserController {
 		headers.add("Alterar cliente", "Altera um cliente e retorna ele");
 		return new ResponseEntity<>(clienteService.alterar(clienteDTO,cpf), headers, HttpStatus.ACCEPTED);
 	}
-	
+
 	@DeleteMapping("/cliente")
 	public ResponseEntity<String> deletar(@Valid @RequestBody String cpf) throws CpfNonexistentException {
 		clienteService.deletar(cpf);
@@ -57,4 +66,41 @@ public class UserController {
 		headers.add("Deletar cliente", "Deleta um cliente");
 		return new ResponseEntity<>("Cliente deletado!",headers, HttpStatus.valueOf(202));
 	}
+
+	//==============================================FUNCIONARIO=========================================================
+
+	@GetMapping("/funcionario")
+	public ResponseEntity<List<Funcionario>> getAllF() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Lista de Funcionarios", "Segue a lista de Funcionarios");
+		return new ResponseEntity<List<Funcionario>>(funcionarioService.listar(), headers, HttpStatus.valueOf(202));
+	}
+
+	@GetMapping("/funcionario/{id}")
+	public ResponseEntity<Funcionario> getByIdF(@Valid @PathVariable Integer id) throws IdNotFoundException {
+		return new ResponseEntity<Funcionario>(funcionarioService.listarPorId(id), HttpStatus.FOUND);
+	}
+
+	@PostMapping("/funcionario")
+	public ResponseEntity<Funcionario> cadastroF(@Valid @RequestBody FuncionarioDTO funcionarioDTO) throws CpfExistentException, EmailExistentException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Inserir Funcionario", "Insere um Funcionarios e retorna ele");
+		return new ResponseEntity<>(funcionarioService.cadastro(funcionarioDTO), headers, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/funcionario/{cpf}")
+	public ResponseEntity<Funcionario> alterarF(@Valid @RequestBody FuncionarioDTO funcionarioDTO, @PathVariable String cpf) throws CpfNonexistentException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Alterar Funcionario", "Altera um Funcionarios e retorna ele");
+		return new ResponseEntity<>(funcionarioService.alterar(funcionarioDTO,cpf), headers, HttpStatus.ACCEPTED);
+	}
+
+	@DeleteMapping("/funcionario")
+	public ResponseEntity<String> deletarF(@Valid @RequestBody String cpf) throws CpfNonexistentException {
+		funcionarioService.deletar(cpf);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Deletar Funcionario", "Deleta um Funcionario");
+		return new ResponseEntity<>("Funcionario deletado!",headers, HttpStatus.valueOf(202));
+	}
+
 }
