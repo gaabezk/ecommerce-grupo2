@@ -49,11 +49,19 @@ public class Cliente {
 	}
 
 	public Cliente(ClienteDTO clienteDTO) {
+		Usuario usuario = new Usuario();
+		usuario.setEmail(clienteDTO.getEmail());
+		usuario.setUsername(clienteDTO.getUsername());
+		usuario.setSenha(clienteDTO.getSenha());
+		usuario.setRole("cliente");
+		usuario.setCliente(Cliente.this);
+
 		this.nome = clienteDTO.getNome();
 		this.cpf = clienteDTO.getCpf();
 		this.dataNascimento = clienteDTO.getDataNascimento();
 		this.telefone = clienteDTO.getTelefone();
-		//this.usuario.setRole("cliente");
+		this.usuario = usuario;
+
 	}
 
 	public Integer getId() {
@@ -80,20 +88,20 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public List<Pedido> getPedidos() {
@@ -110,5 +118,13 @@ public class Cliente {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

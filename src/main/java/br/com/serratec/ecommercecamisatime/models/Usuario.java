@@ -1,5 +1,7 @@
 package br.com.serratec.ecommercecamisatime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -22,29 +24,23 @@ public class Usuario {
     @Column(name = "role")
     private String role;
 
+    @JsonIgnore
     @OneToOne
     private Cliente cliente;
-
+    @JsonIgnore
     @OneToOne
     private Funcionario funcionario;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String email, String username, String senha, String role, Cliente cliente) {
+    public Usuario(Integer id, String email, String username, String senha, String role, Cliente cliente, Funcionario funcionario) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.senha = senha;
-        this.role = "cliente";
+        this.role = role;
         this.cliente = cliente;
-    }
-    public Usuario(Integer id, String email, String username, String senha, String role, Funcionario funcionario) {
-        this.id = id;
-        this.email = email;
-        this.username = username;
-        this.senha = senha;
-        this.role = "funcionario";
         this.funcionario = funcionario;
     }
 
@@ -103,4 +99,5 @@ public class Usuario {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+
 }
