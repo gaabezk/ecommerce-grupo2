@@ -1,10 +1,11 @@
 package br.com.serratec.ecommercecamisatime.models;
 
-import br.com.serratec.ecommercecamisatime.modelsDTO.CriarContaDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ClienteDTO;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,12 +26,16 @@ public class Cliente {
 	@Column(name = "telefone")
 	private String telefone;
 	@NotNull
+	@Past
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Usuario usuario;
 
 	public Cliente() {
 	}
@@ -43,11 +48,19 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public Cliente(CriarContaDTO clienteDTO) {
+	public Cliente(ClienteDTO clienteDTO) {
+		Usuario usuario = new Usuario();
+		usuario.setEmail(clienteDTO.getEmail());
+		usuario.setUsername(clienteDTO.getUsername());
+		usuario.setSenha(clienteDTO.getSenha());
+		usuario.setRole("cliente");
+		usuario.setCliente(Cliente.this);
+
 		this.nome = clienteDTO.getNome();
 		this.cpf = clienteDTO.getCpf();
 		this.dataNascimento = clienteDTO.getDataNascimento();
 		this.telefone = clienteDTO.getTelefone();
+		this.usuario = usuario;
 
 	}
 
@@ -75,20 +88,20 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public List<Pedido> getPedidos() {
@@ -105,5 +118,13 @@ public class Cliente {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

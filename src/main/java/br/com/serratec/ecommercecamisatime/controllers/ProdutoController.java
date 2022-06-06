@@ -1,7 +1,9 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
+import br.com.serratec.ecommercecamisatime.exceptions.ProdutoExistentException;
 import br.com.serratec.ecommercecamisatime.models.Produto;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
 import br.com.serratec.ecommercecamisatime.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +31,7 @@ public class ProdutoController {
 	public ResponseEntity<List<Produto>> getAll() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Lista de Produtos", "Segue a lista de produtos");
-		return new ResponseEntity<List<Produto>>(produtoService.listarProdutos(), headers, HttpStatus.valueOf(202));
+		return new ResponseEntity<List<Produto>>(produtoService.listar(), headers, HttpStatus.valueOf(202));
 	}
 
 	@GetMapping("/{id}")
@@ -37,11 +39,11 @@ public class ProdutoController {
 		return new ResponseEntity<Produto>(produtoService.listarPorId(id), HttpStatus.FOUND);
 	}
 
-	@PostMapping
-	public ResponseEntity<Produto> insert(@RequestBody Produto produto) {
-		produtoService.insert(produto);
+	@PostMapping("/{categoria}")
+	public ResponseEntity<ProdutoDTO> insert(@RequestBody ProdutoDTO produtoDTO,@PathVariable String categoria) throws ProdutoExistentException {
+		produtoService.criar(produtoDTO,categoria);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir produto", "Insere um produto e retorna ele");
-		return new ResponseEntity<>(produto, headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(produtoDTO, headers, HttpStatus.CREATED);
 	}
 }

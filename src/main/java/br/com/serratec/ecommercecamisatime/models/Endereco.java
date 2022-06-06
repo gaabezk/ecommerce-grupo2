@@ -1,5 +1,9 @@
 package br.com.serratec.ecommercecamisatime.models;
 
+import br.com.serratec.ecommercecamisatime.modelsDTO.EnderecoDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ViaCepDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -33,13 +37,15 @@ public class Endereco {
     @Column(name = "estado")
     private String estado;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public Endereco() {
     }
-    public Endereco(Integer idEndereco, String cep, String rua, String numero, String complemento, String bairro, String cidade, String estado) {
+
+    public Endereco(Integer idEndereco, String cep, String rua, String numero, String complemento, String bairro, String cidade, String estado, Cliente cliente) {
         this.idEndereco = idEndereco;
         this.cep = cep;
         this.rua = rua;
@@ -48,6 +54,15 @@ public class Endereco {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+    }
+    public Endereco(ViaCepDTO endereco, EnderecoDTO enderecoDTO) {
+        this.cep = enderecoDTO.getCep();
+        this.rua = endereco.getLogradouro();
+        this.numero = enderecoDTO.getNumero();
+        this.complemento = enderecoDTO.getComplemento();
+        this.bairro = endereco.getBairro();
+        this.cidade = endereco.getLocalidade();
+        this.estado = endereco.getUf();
     }
 
     public Integer getIdEndereco() {

@@ -1,7 +1,9 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
+import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.models.Endereco;
+import br.com.serratec.ecommercecamisatime.modelsDTO.EnderecoDTO;
 import br.com.serratec.ecommercecamisatime.services.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,7 @@ public class EnderecoController {
         return enderecoService.findById(id);
     }
     @PostMapping
-    public Endereco create(@RequestBody Endereco endereco){
+    public Endereco create(@RequestBody EnderecoDTO endereco) throws CpfNonexistentException {
         return enderecoService.create(endereco);
     }
 
