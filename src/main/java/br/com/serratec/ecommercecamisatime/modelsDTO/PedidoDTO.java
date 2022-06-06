@@ -8,12 +8,18 @@ public class PedidoDTO {
 
 	private Integer numeroPedido;
 	private Cliente cliente;
+	private Integer quantidadeProduto;
+	public Integer getQuantidadeProduto() {
+		return quantidadeProduto;
+	}
+
+	public void setQuantidadeProduto(Integer quantidadeProduto) {
+		this.quantidadeProduto = quantidadeProduto;
+	}
+
 	private Double ValorTotal;
 	private boolean finalizado;
-
-	@JsonIgnore
-	private String url;
-
+	
 	public PedidoDTO() {
 	}
 
