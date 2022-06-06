@@ -1,10 +1,6 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistentException;
-import br.com.serratec.ecommercecamisatime.exceptions.CategoriaNonexistentException;
-import br.com.serratec.ecommercecamisatime.exceptions.CpfExistentException;
-import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
-import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
+import br.com.serratec.ecommercecamisatime.exceptions.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +52,11 @@ public class ExceptionController {
         headers.add("ERRO", "EMAIL OU CPF JA UTILIZADOS");
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
-
+    @ExceptionHandler(ProdutoExistentException.class)
+    public ResponseEntity<?> produtoExistentException(ProdutoExistentException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("ERRO", "DESCRICAO JÁ EXISTENTE");
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
 
 }
