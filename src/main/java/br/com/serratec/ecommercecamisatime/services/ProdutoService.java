@@ -68,35 +68,6 @@ public class ProdutoService {
 		return savedProd;
 	}
 
-//	public Produto alterar(Produto produto) throws ProdutoNonexistentException {
-//		Optional<Produto> optional = produtoRepositorio.findByNome(produto.getNome());
-//		if (optional.isEmpty()) {
-//			throw new ProdutoNonexistentException();
-//		}
-//		Produto oldCategoria = optional.get();
-//
-//		if (produto.getNome() != null) {
-//			oldCategoria.setNome(produto.getNome());
-//		}
-//		if (produto.getDescricao() != null) {
-//			oldCategoria.setDescricao(produto.getDescricao());
-//		}
-//		if (produto.getTamanho() != null) {
-//			oldCategoria.setTamanho(produto.getTamanho());
-//		}
-//		if (produto.getGenero() != null) {
-//			oldCategoria.setGenero(produto.getGenero());
-//		}
-//		if (produto.getQuantidadeEstoque() != null) {
-//			oldCategoria.setQuantidadeEstoque(produto.getQuantidadeEstoque());
-//		}
-//		if (produto.getValor() != null) {
-//			oldCategoria.setValor(produto.getValor());
-//		}
-//
-//		return produtoRepositorio.save(oldCategoria);
-//
-//	}
 
 	public Produto alterar(ProdutoDTO produtoDTO, Integer id) throws ProdutoNonexistentException {
 		Optional<Produto> optional = produtoRepositorio.findById(id);

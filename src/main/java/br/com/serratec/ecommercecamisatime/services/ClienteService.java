@@ -54,7 +54,7 @@ public class ClienteService {
 
 		Cliente cliente = new Cliente(clienteDTO);
 
-		Optional<Cliente> optional = usuarioRepositorio.findByEmail(cliente.getUsuario().getEmail());
+		Optional<?> optional = usuarioRepositorio.findByEmail(cliente.getUsuario().getEmail());
 		if (optional.isPresent()) {
 			throw new EmailExistentException();
 		}
