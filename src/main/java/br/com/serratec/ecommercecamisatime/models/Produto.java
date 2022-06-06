@@ -39,17 +39,16 @@ public class Produto {
     @NotNull
     @Column(name = "valor")
     private Double valor;
-    /*
-    @NotNull
-    @Column(name = "imagem")
-    private Double imagem;
-    */
+
+    @JsonIgnore
+    @Column(name = "url")
+    private String url;
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
@@ -83,6 +82,7 @@ public class Produto {
         this.valor = produto.getValor();
         this.funcionario = produto.getFuncionario();
         this.categoria = produto.getCategoria();
+        this.url = produto.getUrl();
     }
 
     public Integer getId() {
@@ -171,5 +171,13 @@ public class Produto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

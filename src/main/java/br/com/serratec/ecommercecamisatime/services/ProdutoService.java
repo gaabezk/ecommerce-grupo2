@@ -10,7 +10,9 @@ import br.com.serratec.ecommercecamisatime.repositorios.CategoriaRepositorio;
 import br.com.serratec.ecommercecamisatime.repositorios.ProdutoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +24,18 @@ public class ProdutoService {
 	@Autowired
 	CategoriaRepositorio categoriaRepositorio;
 
+	@Autowired
+	ImagemService imagemService;
+
+
 	public List<Produto> listar() {
 		return produtoRepositorio.findAll();
+	}
+
+	public Produto getProdutoDTO(Integer id) throws IdNotFoundException {
+		Produto produto = this.listarPorId(id);
+		produto.setUrl(imagemService.createUrl(produto.getId()));
+		return produto;
 	}
 
 	public Produto listarPorId(Integer id) throws IdNotFoundException {
@@ -33,21 +45,25 @@ public class ProdutoService {
 		}
 		return optional.get();
 	}
-	public void verificar(String nome) throws ProdutoExistentException{
-		Optional<Produto> optional = produtoRepositorio.findByNome(nome);
+	public void verificar(String descricao) throws ProdutoExistentException{
+		Optional<Produto> optional = produtoRepositorio.findByDescricao(descricao);
 		if(optional.isPresent()) {
 			throw new ProdutoExistentException();
 		}
 	}
-	public Produto criar(ProdutoDTO produtoDTO,String categoria) throws ProdutoExistentException {
-		verificar(produtoDTO.getNome());
+	public Produto criar(ProdutoDTO produtoDTO, String categoria, MultipartFile file) throws ProdutoExistentException, IOException {
+		verificar(produtoDTO.getDescricao());
 		Optional<Categoria> optional = categoriaRepositorio.findByNome(categoria);
 
 		Produto newProduto = new Produto(produtoDTO);
 
 		newProduto.setCategoria(optional.get());
 
-		return produtoRepositorio.save(newProduto);
+		Produto savedProd = produtoRepositorio.save(newProduto);
+
+		imagemService.create(savedProd,file);
+
+		return savedProd;
 	}
 	
 	public Produto alterar(Produto produto) throws ProdutoNonexistentException {

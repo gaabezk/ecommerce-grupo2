@@ -16,6 +16,8 @@ public class ProdutoDTO {
     private Integer quantidadeEstoque;
     private Instant dataCadastro;
     private Double valor;
+    @JsonIgnore
+    private String url;
 
     @JsonIgnore
     private Funcionario funcionario;
@@ -24,29 +26,6 @@ public class ProdutoDTO {
     private Categoria categoria;
 
     public ProdutoDTO() {
-    }
-
-    public ProdutoDTO(String nome, String descricao, String tamanho, String genero, Integer quantidadeEstoque, Instant dataCadastro, Double valor, Funcionario funcionario, Categoria categoria) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.tamanho = tamanho;
-        this.genero = genero;
-        this.quantidadeEstoque = quantidadeEstoque;
-        this.dataCadastro = dataCadastro;
-        this.valor = valor;
-        this.funcionario = funcionario;
-        this.categoria = categoria;
-    }
-    public ProdutoDTO(Produto produto) {
-        this.nome = produto.getNome();
-        this.descricao = produto.getDescricao();
-        this.tamanho = produto.getTamanho();
-        this.genero = produto.getGenero();
-        this.quantidadeEstoque = produto.getQuantidadeEstoque();
-        this.dataCadastro = produto.getDataCadastro();
-        this.valor = produto.getValor();
-        this.funcionario = produto.getFuncionario();
-        this.categoria = produto.getCategoria();
     }
 
     public String getNome() {
@@ -119,5 +98,13 @@ public class ProdutoDTO {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -2,21 +2,27 @@ package br.com.serratec.ecommercecamisatime.controllers;
 
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.exceptions.ProdutoExistentException;
+import br.com.serratec.ecommercecamisatime.models.Imagem;
 import br.com.serratec.ecommercecamisatime.models.Produto;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
+import br.com.serratec.ecommercecamisatime.services.ImagemService;
 import br.com.serratec.ecommercecamisatime.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
 
+	@Autowired
+	ImagemService imagemService;
 	@Autowired
 	ProdutoService produtoService;
 
@@ -34,16 +40,25 @@ public class ProdutoController {
 		return new ResponseEntity<List<Produto>>(produtoService.listar(), headers, HttpStatus.valueOf(202));
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Produto> getById(@PathVariable Integer id) throws IdNotFoundException {
-		return new ResponseEntity<Produto>(produtoService.listarPorId(id), HttpStatus.FOUND);
+	@GetMapping("/{id}/imagem")
+	public ResponseEntity<byte[]> getImagem(@PathVariable Integer id) throws IdNotFoundException {
+		Imagem imagem = imagemService.getImagem(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("content-type", imagem.getMimetype());
+		headers.add("content-lenght", String.valueOf(imagem.getDados().length));
+		return new ResponseEntity<>(imagem.getDados(),headers, HttpStatus.OK);
 	}
 
 	@PostMapping("/{categoria}")
-	public ResponseEntity<ProdutoDTO> insert(@RequestBody ProdutoDTO produtoDTO,@PathVariable String categoria) throws ProdutoExistentException {
-		produtoService.criar(produtoDTO,categoria);
+	public ResponseEntity<ProdutoDTO> insert(@RequestPart ProdutoDTO produtoDTO, @PathVariable String categoria, @RequestParam MultipartFile file) throws ProdutoExistentException, IOException {
+		produtoService.criar(produtoDTO,categoria,file);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir produto", "Insere um produto e retorna ele");
 		return new ResponseEntity<>(produtoDTO, headers, HttpStatus.CREATED);
+	}
+
+	@GetMapping("/{id}")
+	public Produto get(@PathVariable Integer id) throws IdNotFoundException {
+		return produtoService.getProdutoDTO(id);
 	}
 }
