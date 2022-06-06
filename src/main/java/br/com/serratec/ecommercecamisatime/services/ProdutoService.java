@@ -27,7 +27,6 @@ public class ProdutoService {
 	@Autowired
 	ImagemService imagemService;
 
-
 	public List<Produto> listar() {
 		return produtoRepositorio.findAll();
 	}
@@ -45,13 +44,16 @@ public class ProdutoService {
 		}
 		return optional.get();
 	}
-	public void verificar(String descricao) throws ProdutoExistentException{
+
+	public void verificar(String descricao) throws ProdutoExistentException {
 		Optional<Produto> optional = produtoRepositorio.findByDescricao(descricao);
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			throw new ProdutoExistentException();
 		}
 	}
-	public Produto criar(ProdutoDTO produtoDTO, String categoria, MultipartFile file) throws ProdutoExistentException, IOException {
+
+	public Produto criar(ProdutoDTO produtoDTO, String categoria, MultipartFile file)
+			throws ProdutoExistentException, IOException {
 		verificar(produtoDTO.getDescricao());
 		Optional<Categoria> optional = categoriaRepositorio.findByNome(categoria);
 
@@ -61,38 +63,68 @@ public class ProdutoService {
 
 		Produto savedProd = produtoRepositorio.save(newProduto);
 
-		imagemService.create(savedProd,file);
+		imagemService.create(savedProd, file);
 
 		return savedProd;
 	}
-	
-	public Produto alterar(Produto produto) throws ProdutoNonexistentException {
-		Optional<Produto> optional = produtoRepositorio.findByNome(produto.getNome());
-		if(optional.isEmpty()){
+
+//	public Produto alterar(Produto produto) throws ProdutoNonexistentException {
+//		Optional<Produto> optional = produtoRepositorio.findByNome(produto.getNome());
+//		if (optional.isEmpty()) {
+//			throw new ProdutoNonexistentException();
+//		}
+//		Produto oldCategoria = optional.get();
+//
+//		if (produto.getNome() != null) {
+//			oldCategoria.setNome(produto.getNome());
+//		}
+//		if (produto.getDescricao() != null) {
+//			oldCategoria.setDescricao(produto.getDescricao());
+//		}
+//		if (produto.getTamanho() != null) {
+//			oldCategoria.setTamanho(produto.getTamanho());
+//		}
+//		if (produto.getGenero() != null) {
+//			oldCategoria.setGenero(produto.getGenero());
+//		}
+//		if (produto.getQuantidadeEstoque() != null) {
+//			oldCategoria.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+//		}
+//		if (produto.getValor() != null) {
+//			oldCategoria.setValor(produto.getValor());
+//		}
+//
+//		return produtoRepositorio.save(oldCategoria);
+//
+//	}
+
+	public Produto alterar(ProdutoDTO produtoDTO, Integer id) throws ProdutoNonexistentException {
+		Optional<Produto> optional = produtoRepositorio.findById(id);
+		if (optional.isEmpty()) {
 			throw new ProdutoNonexistentException();
 		}
-		Produto oldCategoria = optional.get();
-		
-		if (produto.getNome() != null) {
-			oldCategoria.setNome(produto.getNome());
-		}
-		if (produto.getDescricao() != null) {
-			oldCategoria.setDescricao(produto.getDescricao());
-		}
-		if (produto.getTamanho() != null) {
-			oldCategoria.setTamanho(produto.getTamanho());
-		}
-		if (produto.getGenero() != null) {
-			oldCategoria.setGenero(produto.getGenero());
-		}
-		if (produto.getQuantidadeEstoque() != null) {
-			oldCategoria.setQuantidadeEstoque(produto.getQuantidadeEstoque());
-		}
-		if (produto.getValor() != null) {
-			oldCategoria.setValor(produto.getValor());
-		}
-		
-		return produtoRepositorio.save(oldCategoria);
+		Produto oldProduto = optional.get();
 
+		if (produtoDTO.getNome() != null) {
+			oldProduto.setNome(produtoDTO.getNome());
+		}
+		if (produtoDTO.getTamanho() != null) {
+			oldProduto.setTamanho(produtoDTO.getTamanho());
+		}
+		if (produtoDTO.getDescricao() != null) {
+			oldProduto.setDescricao(produtoDTO.getDescricao());
+		}
+		if (produtoDTO.getValor() != null) {
+			oldProduto.setValor(produtoDTO.getValor());
+		}
+		return produtoRepositorio.save(oldProduto);
+	}
+
+	public void deletar(Integer id) throws ProdutoNonexistentException {
+		Optional<Produto> optional = produtoRepositorio.findById(id);
+		if (optional.isEmpty()) {
+			throw new ProdutoNonexistentException();
+		}
+		produtoRepositorio.delete(optional.get());
 	}
 }

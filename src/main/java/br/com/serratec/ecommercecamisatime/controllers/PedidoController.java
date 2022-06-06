@@ -1,6 +1,11 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
+import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
+import br.com.serratec.ecommercecamisatime.exceptions.ProdutoNonexistentException;
 import br.com.serratec.ecommercecamisatime.models.Pedido;
+import br.com.serratec.ecommercecamisatime.models.Produto;
+import br.com.serratec.ecommercecamisatime.modelsDTO.PedidoDTO;
+import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
 import br.com.serratec.ecommercecamisatime.services.PedidoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/pedido")
@@ -36,4 +43,20 @@ public class PedidoController {
         headers.add("Insere pedido", "insere um pedido e retorna ele");
         return new ResponseEntity<>(pedido, headers, HttpStatus.CREATED);
     }
+    
+    @PutMapping("/{id}")
+	public ResponseEntity<Pedido> alterar(@Valid @RequestBody PedidoDTO pedidoDTO, @PathVariable Integer id)
+			throws IdNotFoundException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Alterar pedido", "Altera um pedido e retorna ele");
+		return new ResponseEntity<>(pedidoService.alterar(pedidoDTO, id), headers, HttpStatus.ACCEPTED);
+	}
+
+	@DeleteMapping
+	public ResponseEntity<String> deletar(@Valid @RequestBody Integer id) throws IdNotFoundException {
+		pedidoService.deletar(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Deletar pedido", "Deleta um pedido");
+		return new ResponseEntity<>("Pedido deletado!", headers, HttpStatus.valueOf(202));
+	}
 }

@@ -2,7 +2,6 @@ package br.com.serratec.ecommercecamisatime.modelsDTO;
 
 import br.com.serratec.ecommercecamisatime.models.Categoria;
 import br.com.serratec.ecommercecamisatime.models.Funcionario;
-import br.com.serratec.ecommercecamisatime.models.Produto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.Instant;

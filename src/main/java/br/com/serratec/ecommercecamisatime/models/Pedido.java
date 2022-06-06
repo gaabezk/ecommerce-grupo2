@@ -51,4 +51,8 @@ public class Pedido {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
+	public void setValorTotal(Double valorTotal) {
+		this.setValorTotal(valorTotal);
+		
+	}
 }
