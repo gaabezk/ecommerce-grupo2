@@ -103,8 +103,8 @@ public class PedidoService {
         return pedidoRepositorio.save(oldPedido);
     }
 
-    public void deletar(Integer id) throws IdNotFoundException {
-        Optional<Pedido> optional = pedidoRepositorio.findById(id);
+    public void deletar(Integer numero) throws IdNotFoundException {
+        Optional<Pedido> optional = pedidoRepositorio.findByNumPedido(numero);
         if (optional.isEmpty()) {
             throw new IdNotFoundException();
         }
