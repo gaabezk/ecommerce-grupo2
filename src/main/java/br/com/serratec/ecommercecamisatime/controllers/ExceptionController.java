@@ -55,7 +55,14 @@ public class ExceptionController {
     @ExceptionHandler(ProdutoExistentException.class)
     public ResponseEntity<?> produtoExistentException(ProdutoExistentException e){
         HttpHeaders headers = new HttpHeaders();
-        headers.add("ERRO", "DESCRICAO JÁ EXISTENTE");
+        headers.add(e.m1(), e.m2());
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EstoqueInsuficienteException.class)
+    public ResponseEntity<?> estoqueInsuficienteException(EstoqueInsuficienteException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(e.m1(), e.m2());
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
 

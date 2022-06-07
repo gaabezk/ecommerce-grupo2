@@ -1,6 +1,5 @@
 package br.com.serratec.ecommercecamisatime.models;
 
-import br.com.serratec.ecommercecamisatime.modelsDTO.PedidoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -33,29 +32,30 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "pedido")
-    private List<ProdutosPedidos> produtosPedidos;
+    private List<PedidoProdutos> produtos;
 
     public Pedido() {
     }
 
-    public Pedido(Integer id, Double valorTotal, LocalDateTime dataPedido, LocalDateTime dataEntrega, String status, Cliente cliente) {
-        this.numPedido = gerarNum();
-
+    public Pedido(Integer id, Integer numPedido, Double valorTotal, LocalDateTime dataPedido, LocalDateTime dataEntrega, String status, Cliente cliente, List<PedidoProdutos> produtos) {
+        this.id = id;
+        this.numPedido = numPedido;
         this.valorTotal = valorTotal;
         this.dataPedido = dataPedido;
         this.dataEntrega = dataEntrega;
         this.status = status;
         this.cliente = cliente;
+        this.produtos = produtos;
     }
-    public Pedido(PedidoDTO pedidoDTO){
-        this.numPedido = gerarNum();
-        this.dataPedido = LocalDateTime.now();
-        this.status = "pedido criado";
 
-        this.valorTotal = valorTotal;
-        this.dataEntrega = dataEntrega;
+    public Pedido(Cliente cliente){
+        this.numPedido = gerarNum();
+        this.valorTotal = 0.0;
+        this.dataPedido = LocalDateTime.now();
+        this.dataEntrega = LocalDateTime.now().plusDays(15);
+        this.status = "Aberto";
         this.cliente = cliente;
     }
 
@@ -123,12 +123,12 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public List<ProdutosPedidos> getProdutosPedidos() {
-        return produtosPedidos;
+    public List<PedidoProdutos> getProdutos() {
+        return produtos;
     }
 
-    public void setProdutosPedidos(List<ProdutosPedidos> produtosPedidos) {
-        this.produtosPedidos = produtosPedidos;
+    public void setProdutos(List<PedidoProdutos> produtos) {
+        this.produtos = produtos;
     }
 
     @Override
@@ -141,7 +141,7 @@ public class Pedido {
                 ", dataEntrega=" + dataEntrega +
                 ", status='" + status + '\'' +
                 ", cliente=" + cliente +
-                ", produtosPedidos=" + produtosPedidos +
+                ", produtosPedidos=" + produtos +
                 '}';
     }
 }

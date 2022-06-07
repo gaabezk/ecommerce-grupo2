@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-public class ProdutosPedidos {
+public class PedidoProdutos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class ProdutosPedidos {
     @Column(name = "preco")
     private Double preco;
 
-    public ProdutosPedidos() {
+    public PedidoProdutos() {
     }
 
-    public ProdutosPedidos(Integer id, Produto produto, Pedido pedido, Integer quantidade, Double preco) {
+    public PedidoProdutos(Integer id, Produto produto, Pedido pedido, Integer quantidade, Double preco) {
         this.id = id;
         this.produto = produto;
         this.pedido = pedido;
