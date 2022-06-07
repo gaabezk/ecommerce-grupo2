@@ -30,8 +30,7 @@ public class UserController {
 	@Autowired
 	FuncionarioService funcionarioService;
 
-
-	//=================================================CLIENTE==========================================================
+	// =================================================CLIENTE==========================================================
 
 	@GetMapping("/cliente")
 	public ResponseEntity<List<Cliente>> getAll() {
@@ -46,17 +45,19 @@ public class UserController {
 	}
 
 	@PostMapping("/cliente")
-	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody ClienteDTO clienteDTO) throws CpfExistentException, EmailExistentException {
+	public ResponseEntity<Cliente> cadastro(@Valid @RequestBody ClienteDTO clienteDTO)
+			throws CpfExistentException, EmailExistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir cliente", "Insere um cliente e retorna ele");
 		return new ResponseEntity<>(clienteService.cadastro(clienteDTO), headers, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/cliente/{cpf}")
-	public ResponseEntity<Cliente> alterar(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable String cpf) throws CpfNonexistentException {
+	public ResponseEntity<Cliente> alterar(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable String cpf)
+			throws CpfNonexistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Alterar cliente", "Altera um cliente e retorna ele");
-		return new ResponseEntity<>(clienteService.alterar(clienteDTO,cpf), headers, HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(clienteService.alterar(clienteDTO, cpf), headers, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/cliente")
@@ -64,10 +65,10 @@ public class UserController {
 		clienteService.deletar(cpf);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Deletar cliente", "Deleta um cliente");
-		return new ResponseEntity<>("Cliente deletado!",headers, HttpStatus.valueOf(202));
+		return new ResponseEntity<>("Cliente deletado!", headers, HttpStatus.valueOf(202));
 	}
 
-	//==============================================FUNCIONARIO=========================================================
+	// ==============================================FUNCIONARIO=========================================================
 
 	@GetMapping("/funcionario")
 	public ResponseEntity<List<Funcionario>> getAllF() {
@@ -82,17 +83,19 @@ public class UserController {
 	}
 
 	@PostMapping("/funcionario")
-	public ResponseEntity<Funcionario> cadastroF(@Valid @RequestBody FuncionarioDTO funcionarioDTO) throws CpfExistentException, EmailExistentException {
+	public ResponseEntity<Funcionario> cadastroF(@Valid @RequestBody FuncionarioDTO funcionarioDTO)
+			throws CpfExistentException, EmailExistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir Funcionario", "Insere um Funcionarios e retorna ele");
 		return new ResponseEntity<>(funcionarioService.cadastro(funcionarioDTO), headers, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/funcionario/{cpf}")
-	public ResponseEntity<Funcionario> alterarF(@Valid @RequestBody FuncionarioDTO funcionarioDTO, @PathVariable String cpf) throws CpfNonexistentException {
+	public ResponseEntity<Funcionario> alterarF(@Valid @RequestBody FuncionarioDTO funcionarioDTO,
+			@PathVariable String cpf) throws CpfNonexistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Alterar Funcionario", "Altera um Funcionarios e retorna ele");
-		return new ResponseEntity<>(funcionarioService.alterar(funcionarioDTO,cpf), headers, HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(funcionarioService.alterar(funcionarioDTO, cpf), headers, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/funcionario")
@@ -100,7 +103,7 @@ public class UserController {
 		funcionarioService.deletar(cpf);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Deletar Funcionario", "Deleta um Funcionario");
-		return new ResponseEntity<>("Funcionario deletado!",headers, HttpStatus.valueOf(202));
+		return new ResponseEntity<>("Funcionario deletado!", headers, HttpStatus.valueOf(202));
 	}
 
 }
