@@ -67,8 +67,8 @@ public class ProdutoController {
 		return new ResponseEntity<>(produtoService.alterar(produtoDTO, id), headers, HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<String> deletar(@Valid @RequestBody Integer id) throws ProdutoNonexistentException {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deletar(@Valid @PathVariable Integer id) throws ProdutoNonexistentException {
 		produtoService.deletar(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Deletar produto", "Deleta um produto");

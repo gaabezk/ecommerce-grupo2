@@ -2,6 +2,8 @@ package br.com.serratec.ecommercecamisatime.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Imagem {
 
@@ -14,6 +16,9 @@ public class Imagem {
     private String mimetype;
     @Lob
     private byte[] dados;
+    @OneToOne(mappedBy = "imagem")
+    @JsonIgnore
+    private Produto produto;
 
     public Imagem() {
     }
@@ -26,8 +31,7 @@ public class Imagem {
         this.produto = produto;
     }
 
-    @OneToOne
-    private Produto produto;
+
 
     public Integer getId() {
         return id;

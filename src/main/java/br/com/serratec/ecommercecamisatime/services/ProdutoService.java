@@ -88,6 +88,12 @@ public class ProdutoService {
 		if (produtoDTO.getValor() != null) {
 			oldProduto.setValor(produtoDTO.getValor());
 		}
+		if (produtoDTO.getGenero() != null) {
+			oldProduto.setGenero(produtoDTO.getGenero());
+		}
+		if (produtoDTO.getQuantidadeEstoque() != null) {
+			oldProduto.setQuantidadeEstoque(produtoDTO.getQuantidadeEstoque());
+		}
 		return produtoRepositorio.save(oldProduto);
 	}
 
