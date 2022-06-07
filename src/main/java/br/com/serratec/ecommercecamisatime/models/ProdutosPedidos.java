@@ -1,5 +1,7 @@
 package br.com.serratec.ecommercecamisatime.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,11 +12,11 @@ public class ProdutosPedidos {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id",referencedColumnName = "id")
+    @JoinColumn(name = "produto_id")
     private Produto produto;
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "pedido_id",referencedColumnName = "id")
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
     @Column(name = "quantidade")
@@ -66,11 +68,22 @@ public class ProdutosPedidos {
         this.quantidade = quantidade;
     }
 
-    public Double getPreço() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreço(Double preço) {
-        this.preco = preço;
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    @Override
+    public String toString() {
+        return "ProdutosPedidos{" +
+                "id=" + id +
+                ", produto=" + produto +
+                ", pedido=" + pedido +
+                ", quantidade=" + quantidade +
+                ", preco=" + preco +
+                '}';
     }
 }

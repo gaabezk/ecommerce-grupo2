@@ -39,7 +39,8 @@ public class PedidoController {
     @PostMapping
     @ApiOperation(value = "Insere um pedido no banco de dados")
     public ResponseEntity<Pedido> insert (@RequestBody Pedido pedido){
-        pedidoService.insert(pedido);
+        System.out.println(pedido);
+        pedidoService.fazerPedido(pedido);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Insere pedido", "insere um pedido e retorna ele");
         return new ResponseEntity<>(pedido, headers, HttpStatus.CREATED);
