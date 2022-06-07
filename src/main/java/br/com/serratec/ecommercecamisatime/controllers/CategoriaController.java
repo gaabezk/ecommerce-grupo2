@@ -31,6 +31,13 @@ public class CategoriaController {
 		return new ResponseEntity <List <Categoria>>(categoriaService.listar(),HttpStatus.ACCEPTED);
 	}
 	
+	@GetMapping("{nome}")
+	public ResponseEntity <Categoria> getByNome(@PathVariable String nome) throws CategoriaNonexistentException{
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Lista de Categorias", "Retorna uma lista de categorias");
+		return new ResponseEntity <Categoria>(categoriaService.listarPorNome(nome),HttpStatus.ACCEPTED);
+	}
+	
 	@PostMapping
 	public ResponseEntity<Categoria> cadastro(@Valid @RequestBody Categoria categoria) throws CategoriaExistentException {
 		HttpHeaders headers = new HttpHeaders();

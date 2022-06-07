@@ -39,9 +39,9 @@ public class UserController {
 		return new ResponseEntity<List<Cliente>>(clienteService.listarClientes(), headers, HttpStatus.valueOf(202));
 	}
 
-	@GetMapping("/cliente/{id}")
-	public ResponseEntity<Cliente> getById(@Valid @PathVariable Integer id) throws IdNotFoundException {
-		return new ResponseEntity<Cliente>(clienteService.listarPorId(id), HttpStatus.FOUND);
+	@GetMapping("/cliente/{cpf}")
+	public ResponseEntity<Cliente> getById(@Valid @PathVariable String cpf) throws CpfNonexistentException {
+		return new ResponseEntity<Cliente>(clienteService.listarPorCpf(cpf), HttpStatus.FOUND);
 	}
 
 	@PostMapping("/cliente")

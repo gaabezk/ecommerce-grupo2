@@ -57,6 +57,10 @@ public class Produto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     
+    @OneToOne(cascade = CascadeType.ALL)
+    private Imagem imagem;
+    
+    
     public Produto() {
     }
 

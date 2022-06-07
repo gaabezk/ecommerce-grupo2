@@ -74,4 +74,11 @@ public class ExceptionController {
         headers.add(e.m1(), e.m2());
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
+    
+    @ExceptionHandler(ProdutoNonexistentException.class)
+    public ResponseEntity<?> produtoNonexistentException(ProdutoNonexistentException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(e.m1(), e.m2());
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -23,10 +23,10 @@ public class CategoriaService {
 		return repositorio.findAll();
 	}
 	
-	public Categoria listarPorId(Integer id) throws IdNotFoundException {
-		Optional<Categoria> optional = repositorio.findById(id);
+	public Categoria listarPorNome(String nome) throws CategoriaNonexistentException {
+		Optional<Categoria> optional = repositorio.findByNome(nome);
 		if(optional.isEmpty()) {
-			throw new IdNotFoundException();
+			throw new CategoriaNonexistentException();
 		}
 		return optional.get();
 	}
