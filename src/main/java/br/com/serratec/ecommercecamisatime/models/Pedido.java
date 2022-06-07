@@ -32,8 +32,8 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-    @JsonIgnore
-    @OneToMany(mappedBy = "pedido")
+
+    @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
     private List<PedidoProdutos> produtos;
 
     public Pedido() {

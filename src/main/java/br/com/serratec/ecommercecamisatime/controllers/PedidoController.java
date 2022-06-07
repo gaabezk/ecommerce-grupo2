@@ -56,8 +56,8 @@ public class PedidoController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deletar(@Valid @RequestBody Integer id) throws IdNotFoundException {
-        pedidoService.deletar(id);
+    public ResponseEntity<String> deletar(@Valid @RequestBody Integer numero) throws IdNotFoundException {
+        pedidoService.deletar(numero);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Deletar pedido", "Deleta um pedido");
         return new ResponseEntity<>("Pedido deletado!", headers, HttpStatus.valueOf(202));
