@@ -1,6 +1,8 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
 import br.com.serratec.ecommercecamisatime.exceptions.*;
+import br.com.serratec.ecommercecamisatime.models.Endereco;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,4 +68,10 @@ public class ExceptionController {
         return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(EnderecoNonexistentException.class)
+    public ResponseEntity<?> enderecoNonexistentException(EnderecoNonexistentException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(e.m1(), e.m2());
+        return new ResponseEntity<>(null,headers, HttpStatus.BAD_REQUEST);
+    }
 }
