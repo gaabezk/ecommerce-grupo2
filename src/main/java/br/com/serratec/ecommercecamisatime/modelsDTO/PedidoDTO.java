@@ -6,53 +6,24 @@ import br.com.serratec.ecommercecamisatime.models.Cliente;
 
 public class PedidoDTO {
 
-	private Integer numeroPedido;
-	private Cliente cliente;
-	private Integer quantidadeProduto;
-	public Integer getQuantidadeProduto() {
-		return quantidadeProduto;
+	public Integer idProduto;
+
+	public Double valorTotal;
+
+
+	public Integer getIdProduto() {
+		return idProduto;
 	}
 
-	public void setQuantidadeProduto(Integer quantidadeProduto) {
-		this.quantidadeProduto = quantidadeProduto;
-	}
-
-	private Double ValorTotal;
-	private boolean finalizado;
-	
-	public PedidoDTO() {
-	}
-
-	public Integer getNumeroPedido() {
-		return numeroPedido;
-	}
-
-	public void setNumeroPedido(Integer numeroPedido) {
-		this.numeroPedido = numeroPedido;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public Double getValorTotal() {
-		return ValorTotal;
+		return valorTotal;
 	}
 
 	public void setValorTotal(Double valorTotal) {
-		ValorTotal = valorTotal;
+		this.valorTotal = valorTotal;
 	}
-
-	public boolean isFinalizado() {
-		return finalizado;
-	}
-
-	public void setFinalizado(boolean finalizado) {
-		this.finalizado = finalizado;
-	}
-
 }
