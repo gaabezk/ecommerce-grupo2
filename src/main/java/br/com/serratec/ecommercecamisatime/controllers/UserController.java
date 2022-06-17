@@ -19,7 +19,7 @@ import br.com.serratec.ecommercecamisatime.models.Cliente;
 import br.com.serratec.ecommercecamisatime.services.ClienteService;
 
 import javax.validation.Valid;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/usuario")
 public class UserController {

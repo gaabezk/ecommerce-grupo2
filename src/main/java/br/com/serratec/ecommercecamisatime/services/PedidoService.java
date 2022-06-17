@@ -73,7 +73,6 @@ public class PedidoService {
         pedidoProdutos.setQuantidade(produtos.getQuantidade());
         pedidoProdutos.setPreco(produtos.getPreco());
 
-
         List<PedidoProdutos> listaProdutos = new ArrayList<>();
         listaProdutos.add(pedidoProdutos);
 

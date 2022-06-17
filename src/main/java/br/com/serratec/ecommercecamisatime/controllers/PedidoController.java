@@ -2,12 +2,8 @@ package br.com.serratec.ecommercecamisatime.controllers;
 
 import br.com.serratec.ecommercecamisatime.exceptions.EstoqueInsuficienteException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
-import br.com.serratec.ecommercecamisatime.exceptions.ProdutoNonexistentException;
 import br.com.serratec.ecommercecamisatime.models.Pedido;
-import br.com.serratec.ecommercecamisatime.models.PedidoProdutos;
-import br.com.serratec.ecommercecamisatime.models.Produto;
 import br.com.serratec.ecommercecamisatime.modelsDTO.PedidoDTO;
-import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO2;
 import br.com.serratec.ecommercecamisatime.services.PedidoService;
 import io.swagger.annotations.Api;
@@ -21,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import javax.validation.Valid;
-
 @RestController
 @RequestMapping("/pedido")
 @Api(value = "Camisas API REST")

@@ -28,12 +28,19 @@ public class ProdutoService {
 	ImagemService imagemService;
 
 	public List<Produto> listar() {
-		return produtoRepositorio.findAll();
+		List<Produto> lista = produtoRepositorio.findAll();
+		for (Produto prod: lista ){
+			prod.setUrl(imagemService.createUrl(prod.getId()));
+		}
+
+		return lista;
+
 	}
 
 	public Produto getProdutoDTO(Integer id) throws IdNotFoundException {
 		Produto produto = this.listarPorId(id);
 		produto.setUrl(imagemService.createUrl(produto.getId()));
+		System.out.println(produto.getUrl());
 		return produto;
 	}
 
@@ -53,8 +60,7 @@ public class ProdutoService {
 	}
 
 	public Produto criar(ProdutoDTO produtoDTO, String categoria, MultipartFile file)
-			throws ProdutoExistentException, IOException {
-		verificar(produtoDTO.getDescricao());
+			throws IOException {
 		Optional<Categoria> optional = categoriaRepositorio.findByNome(categoria);
 
 		Produto newProduto = new Produto(produtoDTO);

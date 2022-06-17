@@ -40,7 +40,6 @@ public class Produto {
     @Column(name = "valor")
     private Double valor;
 
-    @JsonIgnore
     @Column(name = "url")
     private String url;
 
@@ -82,7 +81,7 @@ public class Produto {
         this.tamanho = produto.getTamanho();
         this.genero = produto.getGenero();
         this.quantidadeEstoque = produto.getQuantidadeEstoque();
-        this.dataCadastro = produto.getDataCadastro();
+        this.dataCadastro = Instant.now();
         this.valor = produto.getValor();
         this.funcionario = produto.getFuncionario();
         this.categoria = produto.getCategoria();
@@ -183,5 +182,11 @@ public class Produto {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+    public Imagem getImagem() {
+        return imagem;
+    }
+    public void setImagem(Imagem imagem) {
+        this.imagem = imagem;
     }
 }
