@@ -42,7 +42,7 @@ public class Produto {
 
     @Column(name = "url")
     private String url;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
@@ -55,8 +55,9 @@ public class Produto {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "produto")
     private Imagem imagem;
     
     
@@ -189,4 +190,5 @@ public class Produto {
     public void setImagem(Imagem imagem) {
         this.imagem = imagem;
     }
+
 }
