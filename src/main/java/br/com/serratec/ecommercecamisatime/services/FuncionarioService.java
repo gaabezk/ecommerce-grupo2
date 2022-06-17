@@ -49,7 +49,12 @@ public class FuncionarioService {
         }
     }
 
-    public Funcionario cadastro(FuncionarioDTO funcionarioDTO) throws CpfExistentException, EmailExistentException {
+    public Funcionario cadastro(FuncionarioDTO funcionarioDTO,String cpf) throws CpfExistentException, EmailExistentException, CpfNonexistentException {
+        Optional<Funcionario> func = funcionarioRepositorio.findByCpf(cpf);
+        if (func.isEmpty()){
+            throw new CpfNonexistentException();
+        }
+
         verificarCpf(funcionarioDTO.getCpf());
 
         Funcionario funcionario = new Funcionario(funcionarioDTO);

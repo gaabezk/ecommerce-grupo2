@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.com.serratec.ecommercecamisatime.exceptions.CategoriaNonexistentException;
+import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
 import br.com.serratec.ecommercecamisatime.modelsDTO.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -37,11 +38,11 @@ public class CategoriaController {
 		return new ResponseEntity <Categoria>(categoriaService.listarPorNome(nome),HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping
-	public ResponseEntity<Categoria> cadastro(@Valid @RequestBody Categoria categoria) throws CategoriaExistentException {
+	@PostMapping("/{cpf}")
+	public ResponseEntity<Categoria> cadastro(@Valid @RequestBody Categoria categoria, @PathVariable String cpf) throws CategoriaExistentException, CpfNonexistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir categoria", "Insere uma categoria e retorna ela");
-		return new ResponseEntity<>(categoriaService.criar(categoria), headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(categoriaService.criar(categoria,cpf), headers, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{nome}")

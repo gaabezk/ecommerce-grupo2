@@ -1,11 +1,14 @@
 package br.com.serratec.ecommercecamisatime.controllers;
 
+import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.exceptions.ProdutoExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.ProdutoNonexistentException;
+import br.com.serratec.ecommercecamisatime.models.Funcionario;
 import br.com.serratec.ecommercecamisatime.models.Imagem;
 import br.com.serratec.ecommercecamisatime.models.Produto;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
+import br.com.serratec.ecommercecamisatime.repositorios.FuncionarioRepositorio;
 import br.com.serratec.ecommercecamisatime.services.ImagemService;
 import br.com.serratec.ecommercecamisatime.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 @CrossOrigin
@@ -24,6 +28,8 @@ import javax.validation.Valid;
 @RequestMapping("/produto")
 public class ProdutoController {
 
+	@Autowired
+	FuncionarioRepositorio funcionarioRepositorio;
 	@Autowired
 	ImagemService imagemService;
 	@Autowired
@@ -45,10 +51,10 @@ public class ProdutoController {
 		return new ResponseEntity<>(imagem.getDados(), headers, HttpStatus.OK);
 	}
 
-	@PostMapping("/{categoria}")
-	public ResponseEntity<ProdutoDTO> insert(@RequestPart ProdutoDTO produtoDTO, @PathVariable String categoria,
-			@RequestParam MultipartFile file) throws IOException {
-		produtoService.criar(produtoDTO, categoria, file);
+	@PostMapping("/{categoria}/{cpf}")
+	public ResponseEntity<ProdutoDTO> insert(@RequestPart ProdutoDTO produtoDTO, @PathVariable String categoria, @PathVariable String cpf,
+			@RequestParam MultipartFile file) throws IOException, CpfNonexistentException {
+		produtoService.criar(produtoDTO, categoria, file,cpf);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir produto", "Insere um produto e retorna ele");
 		return new ResponseEntity<>(produtoDTO, headers, HttpStatus.CREATED);

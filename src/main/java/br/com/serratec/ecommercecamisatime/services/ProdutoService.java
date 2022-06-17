@@ -1,12 +1,15 @@
 package br.com.serratec.ecommercecamisatime.services;
 
+import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.IdNotFoundException;
 import br.com.serratec.ecommercecamisatime.exceptions.ProdutoExistentException;
 import br.com.serratec.ecommercecamisatime.exceptions.ProdutoNonexistentException;
 import br.com.serratec.ecommercecamisatime.models.Categoria;
+import br.com.serratec.ecommercecamisatime.models.Funcionario;
 import br.com.serratec.ecommercecamisatime.models.Produto;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
 import br.com.serratec.ecommercecamisatime.repositorios.CategoriaRepositorio;
+import br.com.serratec.ecommercecamisatime.repositorios.FuncionarioRepositorio;
 import br.com.serratec.ecommercecamisatime.repositorios.ProdutoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,8 @@ import java.util.Optional;
 @Service
 public class ProdutoService {
 
+	@Autowired
+	FuncionarioRepositorio funcionarioRepositorio;
 	@Autowired
 	ProdutoRepositorio produtoRepositorio;
 	@Autowired
@@ -59,9 +64,13 @@ public class ProdutoService {
 		}
 	}
 
-	public Produto criar(ProdutoDTO produtoDTO, String categoria, MultipartFile file)
-			throws IOException {
+	public Produto criar(ProdutoDTO produtoDTO, String categoria, MultipartFile file, String cpf)
+			throws IOException, CpfNonexistentException {
 		Optional<Categoria> optional = categoriaRepositorio.findByNome(categoria);
+		Optional<Funcionario> funcionario = funcionarioRepositorio.findByCpf(cpf);
+		if (funcionario.isEmpty()){
+			throw new CpfNonexistentException();
+		}
 
 		Produto newProduto = new Produto(produtoDTO);
 
