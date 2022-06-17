@@ -15,6 +15,7 @@ public class Imagem {
     @Lob
     private byte[] dados;
     @OneToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
 
     public Imagem() {
@@ -68,4 +69,5 @@ public class Imagem {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
+
 }
