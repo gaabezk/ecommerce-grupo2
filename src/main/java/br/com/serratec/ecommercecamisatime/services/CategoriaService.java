@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.serratec.ecommercecamisatime.exceptions.CategoriaNonexistentException;
+import br.com.serratec.ecommercecamisatime.exceptions.CpfNonexistentException;
+import br.com.serratec.ecommercecamisatime.models.Funcionario;
 import br.com.serratec.ecommercecamisatime.modelsDTO.CategoriaDTO;
+import br.com.serratec.ecommercecamisatime.repositorios.FuncionarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,8 @@ import br.com.serratec.ecommercecamisatime.repositorios.CategoriaRepositorio;
 
 @Service
 public class CategoriaService {
-
+	@Autowired
+	FuncionarioRepositorio funcionarioRepositorio;
 	@Autowired
 	CategoriaRepositorio repositorio;
 	
@@ -38,7 +42,11 @@ public class CategoriaService {
 		}
 	}
 	
-	public Categoria criar(Categoria categoria) throws CategoriaExistentException {
+	public Categoria criar(Categoria categoria,String cpf) throws CategoriaExistentException, CpfNonexistentException {
+		Optional<Funcionario> funcionario = funcionarioRepositorio.findByCpf(cpf);
+		if (funcionario.isEmpty()){
+			throw new CpfNonexistentException();
+		}
 		verificar(categoria.getNome());
 		return repositorio.save(categoria);
 	}

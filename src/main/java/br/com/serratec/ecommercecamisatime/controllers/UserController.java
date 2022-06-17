@@ -82,12 +82,12 @@ public class UserController {
 		return new ResponseEntity<Funcionario>(funcionarioService.listarPorId(id), HttpStatus.FOUND);
 	}
 
-	@PostMapping("/funcionario")
-	public ResponseEntity<Funcionario> cadastroF(@Valid @RequestBody FuncionarioDTO funcionarioDTO)
-			throws CpfExistentException, EmailExistentException {
+	@PostMapping("/funcionario/{cpf}")
+	public ResponseEntity<Funcionario> cadastroF(@Valid @RequestBody FuncionarioDTO funcionarioDTO, @PathVariable String cpf)
+			throws CpfExistentException, EmailExistentException, CpfNonexistentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir Funcionario", "Insere um Funcionarios e retorna ele");
-		return new ResponseEntity<>(funcionarioService.cadastro(funcionarioDTO), headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(funcionarioService.cadastro(funcionarioDTO,cpf), headers, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/funcionario/{cpf}")
