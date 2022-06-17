@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
@@ -47,7 +47,7 @@ public class ProdutoController {
 
 	@PostMapping("/{categoria}")
 	public ResponseEntity<ProdutoDTO> insert(@RequestPart ProdutoDTO produtoDTO, @PathVariable String categoria,
-			@RequestParam MultipartFile file) throws ProdutoExistentException, IOException {
+			@RequestParam MultipartFile file) throws IOException {
 		produtoService.criar(produtoDTO, categoria, file);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Inserir produto", "Insere um produto e retorna ele");

@@ -15,15 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import br.com.serratec.ecommercecamisatime.exceptions.CategoriaExistentException;
 import br.com.serratec.ecommercecamisatime.models.Categoria;
 import br.com.serratec.ecommercecamisatime.services.CategoriaService;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/categoria")
 public class CategoriaController {
 	
 	@Autowired
 	CategoriaService categoriaService;
-	
-	
+
 	@GetMapping
 	public ResponseEntity <List<Categoria>> getAll(){
 		HttpHeaders headers = new HttpHeaders();

@@ -30,7 +30,7 @@ public class ImagemService {
         return imagemRepositorio.save(imagem);
     }
     public String createUrl(Integer id){
-        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/(id)/imagem/").buildAndExpand(id).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/imagem/").buildAndExpand(id).toUri();
 
         return uri.toString();
 
