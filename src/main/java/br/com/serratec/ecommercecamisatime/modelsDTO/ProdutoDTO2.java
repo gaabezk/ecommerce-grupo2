@@ -4,15 +4,13 @@ public class ProdutoDTO2 {
 
     private Integer id;
     private Integer quantidade;
-    private Double preco;
 
     public ProdutoDTO2() {
     }
 
-    public ProdutoDTO2(Integer id, Integer quantidade, Double preco) {
+    public ProdutoDTO2(Integer id, Integer quantidade) {
         this.id = id;
         this.quantidade = quantidade;
-        this.preco = preco;
     }
 
     public Integer getId() {
@@ -31,11 +29,4 @@ public class ProdutoDTO2 {
         this.quantidade = quantidade;
     }
 
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
 }

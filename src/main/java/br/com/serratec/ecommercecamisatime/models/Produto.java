@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "produto")
@@ -48,7 +49,7 @@ public class Produto {
     private Funcionario funcionario;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
@@ -59,7 +60,10 @@ public class Produto {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "produto")
     private Imagem imagem;
-    
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "produto",cascade = CascadeType.ALL)
+    private List<PedidoProdutos> pedidoProdutos;
     
     public Produto() {
     }

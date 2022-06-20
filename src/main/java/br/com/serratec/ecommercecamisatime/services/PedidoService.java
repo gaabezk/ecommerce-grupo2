@@ -8,7 +8,6 @@ import br.com.serratec.ecommercecamisatime.exceptions.EstoqueInsuficienteExcepti
 import br.com.serratec.ecommercecamisatime.models.Cliente;
 import br.com.serratec.ecommercecamisatime.models.PedidoProdutos;
 import br.com.serratec.ecommercecamisatime.models.Produto;
-import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO;
 import br.com.serratec.ecommercecamisatime.modelsDTO.ProdutoDTO2;
 import br.com.serratec.ecommercecamisatime.repositorios.ClienteRepositorio;
 import br.com.serratec.ecommercecamisatime.repositorios.PedidoProdutosRepositorio;
@@ -71,14 +70,14 @@ public class PedidoService {
         pedidoProdutos.setProduto(produto1);
         pedidoProdutos.setPedido(pedido);
         pedidoProdutos.setQuantidade(produtos.getQuantidade());
-        pedidoProdutos.setPreco(produtos.getPreco());
+        pedidoProdutos.setPreco(produto1.getValor());
 
         List<PedidoProdutos> listaProdutos = new ArrayList<>();
         listaProdutos.add(pedidoProdutos);
 
         pedido.setProdutos(listaProdutos);
 
-        pedido.setValorTotal(produtos.getQuantidade() * produtos.getPreco());
+        pedido.setValorTotal(produtos.getQuantidade() * produto1.getValor());
 
         produto1.setQuantidadeEstoque(produto1.getQuantidadeEstoque() - produtos.getQuantidade());
 
