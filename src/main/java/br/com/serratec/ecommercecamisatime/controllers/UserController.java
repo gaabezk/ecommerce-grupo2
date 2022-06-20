@@ -60,8 +60,8 @@ public class UserController {
 		return new ResponseEntity<>(clienteService.alterar(clienteDTO, cpf), headers, HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping("/cliente")
-	public ResponseEntity<String> deletar(@Valid @RequestBody String cpf) throws CpfNonexistentException {
+	@DeleteMapping("/cliente/{cpf}")
+	public ResponseEntity<String> deletar(@Valid @PathVariable String cpf) throws CpfNonexistentException {
 		clienteService.deletar(cpf);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Deletar cliente", "Deleta um cliente");
