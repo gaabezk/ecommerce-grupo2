@@ -29,6 +29,7 @@ public class Cliente {
 	@Past
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
+
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

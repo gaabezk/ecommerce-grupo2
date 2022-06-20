@@ -50,8 +50,8 @@ public class PedidoController {
         return new ResponseEntity<>(pedidoService.alterar(pedidoDTO, id), headers, HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deletar(@Valid @RequestBody Integer numero) throws IdNotFoundException {
+    @DeleteMapping("/{numero}")
+    public ResponseEntity<String> deletar(@Valid @PathVariable Integer numero) throws IdNotFoundException {
         pedidoService.deletar(numero);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Deletar pedido", "Deleta um pedido");
