@@ -88,7 +88,7 @@ public class PedidoService {
     }
 
     public Pedido alterar(PedidoDTO pedidoDTO, Integer id) throws IdNotFoundException {
-        Optional<Pedido> optional = pedidoRepositorio.findById(id);
+        Optional<Pedido> optional = pedidoRepositorio.findByNumPedido(id);
         if (optional.isEmpty()) {
             throw new IdNotFoundException();
         }
