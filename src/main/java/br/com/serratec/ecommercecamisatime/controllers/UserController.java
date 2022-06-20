@@ -98,7 +98,7 @@ public class UserController {
 		return new ResponseEntity<>(funcionarioService.alterar(funcionarioDTO, cpf), headers, HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping("/funcionario")
+	@DeleteMapping("/funcionario/{cpf}")
 	public ResponseEntity<String> deletarF(@Valid @PathVariable String cpf) throws CpfNonexistentException {
 		funcionarioService.deletar(cpf);
 		HttpHeaders headers = new HttpHeaders();
