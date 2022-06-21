@@ -34,9 +34,9 @@ public class PedidoController {
         return new ResponseEntity<List<Pedido>>(pedidoService.listarPedidos(), headers, HttpStatus.valueOf(202));
     }
 
-    @PostMapping
+    @PostMapping("/{cpf}")
     @ApiOperation(value = "Insere um pedido no banco de dados")
-    public ResponseEntity<Pedido> insert(@RequestBody ProdutoDTO2 produtosDTO2, @RequestParam String cpf) throws EstoqueInsuficienteException {
+    public ResponseEntity<Pedido> insert(@RequestBody ProdutoDTO2 produtosDTO2, @PathVariable String cpf) throws EstoqueInsuficienteException {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Insere pedido", "insere um pedido e retorna ele");
         return new ResponseEntity<Pedido>(pedidoService.fazerPedido(produtosDTO2, cpf), headers, HttpStatus.CREATED);
