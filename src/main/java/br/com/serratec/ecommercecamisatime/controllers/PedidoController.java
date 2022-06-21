@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import javax.validation.Valid;
+@CrossOrigin
 @RestController
 @RequestMapping("/pedido")
 @Api(value = "Camisas API REST")
-@CrossOrigin(origins = "/*")
 public class PedidoController {
 
     @Autowired

@@ -48,7 +48,6 @@ public class Produto {
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
-    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
