@@ -1,10 +1,10 @@
-package br.com.serratec.ecommercecamisatime;
+package com.serratec.ecommerceapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EComerceCamisaTimeApplicationTests {
+class EcommerceApiApplicationTests {
 
     @Test
     void contextLoads() {
